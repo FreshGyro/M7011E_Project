@@ -4,6 +4,7 @@ console.log("Starting server...");
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
+const consumption = require("./consumption.js");
 
 const app = express();
 
@@ -13,12 +14,17 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.listen(80);
 
-app.post("/test", (request, response) => {
-	response.json({
-		"message":"Hello world!"
-	});
+//Random customers
+for(let i = 0; i < 12345; ++i) {
+	const x = Math.random() * 100000;
+	const y = Math.random() * 100000;
+	consumption.addCustomer(x, y);
+}
+
+app.get("/totalconsumption", (request, response) => {
+	response.json(consumption.getTotalConsumption());
 });
 
+app.listen(80);
 console.log("Server is running!");
