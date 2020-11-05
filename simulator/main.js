@@ -5,6 +5,7 @@ const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const consumption = require("./consumption.js");
+const weather = require("./weather.js");
 
 const app = express();
 
@@ -24,6 +25,12 @@ for(let i = 0; i < 12345; ++i) {
 
 app.get("/totalconsumption", (request, response) => {
 	response.json(consumption.getTotalConsumption());
+});
+
+app.get("/windspeed", (request, response) => {
+	const x = parseFloat(request.query.x);
+	const y = parseFloat(request.query.y);
+	response.json(weather.getWindSpeed(x, y));
 });
 
 app.listen(80);
