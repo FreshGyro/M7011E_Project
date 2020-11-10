@@ -1,4 +1,4 @@
-
+const gaussian = require("./gaussian_distribution.js");
 const weather = require("./weather.js");
 
 class Prosumer {
@@ -7,6 +7,7 @@ class Prosumer {
 		this._posY = posY;
 
 		this._batteryLevel = 0;
+		this._consumption = gaussian.gaussianDistribution(800);
 	}
 
 	useBattery(amount) {
@@ -27,7 +28,7 @@ class Prosumer {
 	}
 
 	getConsumption() {
-		return 800;//Watts
+		return this._consumption;//Watts
 	}
 }
 
