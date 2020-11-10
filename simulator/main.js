@@ -20,9 +20,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 for(let i = 0; i < 12345; ++i) {
 	const x = Math.random() * 100000;
 	const y = Math.random() * 100000;
-	consumption.addCustomer(x, y);
+	consumption.addProsumer(x, y);
 }
 
+app.get("/totalproduction", (request, response) => {
+	response.json(consumption.getTotalProduction());
+});
 app.get("/totalconsumption", (request, response) => {
 	response.json(consumption.getTotalConsumption());
 });
@@ -36,3 +39,15 @@ app.get("/windspeed", (request, response) => {
 
 app.listen(80);
 console.log("Server is running!");
+
+function update() {
+	consumption.update();
+	console.log("Production: " + consumption.getTotalProduction());
+	console.log("Consumption: " + consumption.getTotalConsumption());
+	console.log("Delta: " + (consumption.getTotalProduction() - consumption.getTotalConsumption()));
+}
+
+setInterval(() => {
+	update();
+}, 10000);
+update();
