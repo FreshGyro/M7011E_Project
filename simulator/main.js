@@ -23,11 +23,20 @@ for(let i = 0; i < 12345; ++i) {
 	consumption.addProsumer(x, y);
 }
 
-app.get("/totalproduction", (request, response) => {
-	response.json(consumption.getTotalProduction());
+app.get("/getmarketstats", (request, response) => {
+	response.json({
+		"time":consumption.getCurrentTime(),
+		"production":consumption.getMarketProduction(),
+		"demand":consumption.getMarketDemand()
+	});
 });
-app.get("/totalconsumption", (request, response) => {
-	response.json(consumption.getTotalConsumption());
+
+app.get("/getbatterystats", (request, response) => {
+	response.json({
+		"time":consumption.getCurrentTime(),
+		"battery":consumption.getTotalBattery(),
+		"max_battery":consumption.getTotalMaxBattery()
+	});
 });
 
 app.get("/windspeed", (request, response) => {
@@ -42,9 +51,9 @@ console.log("Server is running!");
 
 function update() {
 	consumption.update();
-	console.log("Production: " + consumption.getTotalProduction());
-	console.log("Consumption: " + consumption.getTotalConsumption());
-	console.log("Delta: " + (consumption.getTotalProduction() - consumption.getTotalConsumption()));
+	console.log("Market production: " + consumption.getMarketProduction());
+	console.log("Market demand: " + consumption.getMarketDemand());
+	console.log("Delta: " + (consumption.getMarketProduction() - consumption.getMarketDemand()));
 }
 
 setInterval(() => {

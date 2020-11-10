@@ -5,9 +5,13 @@ class Prosumer {
 	constructor(posX, posY) {
 		this._posX = posX;
 		this._posY = posY;
-
-		this._batteryLevel = 0;
 		this._consumption = gaussian.gaussianDistribution(800);
+		this._batteryLevel = 0;
+		this._marketRatio = 0.3;
+	}
+
+	getMarketRatio() {
+		return this._marketRatio;
 	}
 
 	useBattery(amount) {

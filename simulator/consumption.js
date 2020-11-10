@@ -8,10 +8,14 @@ function addProsumer(x, y) {
 }
 module.exports.addProsumer = addProsumer;
 
+let totalMarketProduction = 0;
+let totalMarketDemand = 0;
+
 let currentTime = 0;
 function update() {
 	++currentTime;
 
+	let marketProduction = 0;
 	for(let i = 0; i < prosumers.length; ++i) {
 		const p = prosumers[i];
 		const production = p.getProduction(currentTime);
@@ -20,39 +24,89 @@ function update() {
 			//Evens out
 		} else if(production > consumption) {
 			//Charge battery
-			p.chargeBattery(production - consumption);
-		} else if(production < consumption) {
-			//Use battery
-			p.useBattery(consumption - production);
+			const marketRatio = p.getMarketRatio();
 
-			if(p.getBatteryLevel() == 0) {
-				//BLACKOUT
+			const spaceInBattery = p.getMaxBatteryLevel() - p.getBatteryLevel();
+			if(spaceInBattery >= (1 - marketRatio) * (production - consumption)) {
+				//There is room in the battery for all the charge
+				p.chargeBattery((1 - marketRatio) * (production - consumption));
+				marketProduction += marketRatio * (production - consumption);
+			} else {
+				//There is not enough room in the battery, sell excess electricity
+				p.chargeBattery(spaceInBattery);
+				marketProduction += production - consumption - spaceInBattery;
 			}
 		}
 	}
-}
-module.exports.update = update;
 
-//Get total energy production in watts
-function getTotalProduction() {
-	let total = 0;
+
+	let marketDemand = 0;
+	let marketAmount = marketProduction;
 	for(let i = 0; i < prosumers.length; ++i) {
 		const p = prosumers[i];
 		const production = p.getProduction(currentTime);
-		total += production;
-	}
-	return total;
-}
-module.exports.getTotalProduction = getTotalProduction;
+		const consumption = p.getConsumption();
+		if(production < consumption) {
+			//Use battery
+			let demand;
+			if(consumption - production > p.getBatteryLevel()) {
+				demand = consumption - production - p.getBatteryLevel();
+			} else {
+				//Enough charge in battery, no market demand
+				demand = 0;
+			}
+			p.useBattery(consumption - production);
 
-//Get total energy consumption in watts
-function getTotalConsumption() {
+			if(demand > 0) {
+				if(marketAmount > demand) {
+					//Used electricity from market
+					marketAmount -= demand;
+				} else {
+					//Blackout
+				}
+			}
+
+			marketDemand += demand;
+		}
+	}
+
+	totalMarketProduction = marketProduction;
+	totalMarketDemand = marketDemand;
+}
+module.exports.update = update;
+
+function getCurrentTime() {
+	return currentTime;
+}
+module.exports.getCurrentTime = getCurrentTime;
+
+function getTotalBattery() {
 	let total = 0;
 	for(let i = 0; i < prosumers.length; ++i) {
 		const p = prosumers[i];
-		const consumption = p.getConsumption();
-		total += consumption;
+		total += p.getBatteryLevel();
 	}
 	return total;
 }
-module.exports.getTotalConsumption = getTotalConsumption;
+module.exports.getTotalBattery = getTotalBattery;
+
+function getTotalMaxBattery() {
+	let total = 0;
+	for(let i = 0; i < prosumers.length; ++i) {
+		const p = prosumers[i];
+		total += p.getMaxBatteryLevel();
+	}
+	return total;
+}
+module.exports.getTotalMaxBattery = getTotalMaxBattery;
+
+
+function getMarketProduction() {
+	return totalMarketProduction;
+}
+module.exports.getMarketProduction = getMarketProduction;
+
+function getMarketDemand() {
+	return totalMarketDemand;
+}
+module.exports.getMarketDemand = getMarketDemand;
