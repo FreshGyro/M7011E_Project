@@ -30,7 +30,8 @@ app.get("/totalconsumption", (request, response) => {
 app.get("/windspeed", (request, response) => {
 	const x = parseFloat(request.query.x);
 	const y = parseFloat(request.query.y);
-	response.json(weather.getWindSpeed(x, y));
+	const t = parseFloat(request.query.t);
+	response.json(weather.getWindSpeed(x, y, t));
 });
 
 app.listen(80);
