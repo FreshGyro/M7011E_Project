@@ -49,5 +49,5 @@ function update() {
 
 setInterval(() => {
 	update();
-}, 10000);
+}, 1000);
 update();
