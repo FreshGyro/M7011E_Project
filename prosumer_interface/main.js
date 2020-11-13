@@ -1,6 +1,8 @@
 
 const info = document.getElementById("info");
-const prosumerID = 0;
+const marketRatioSlider = document.getElementById("marketRatio");
+
+const prosumerID = 1;
 
 function updateInfo() {
 	const request = new XMLHttpRequest();
@@ -32,9 +34,22 @@ function updateInfo() {
 				p.innerText = keys[i] + ": " + values[i];
 				info.appendChild(p);
 			}
+
+			marketRatioSlider.value = json["market_ratio"] * 100;
 		}
 	};
 	request.open("GET", "http://127.0.0.1:81/getprosumerdata?id=" + prosumerID, true);
 	request.send();
 }
 setInterval(updateInfo, 1000);
+
+marketRatioSlider.onchange = function() {
+	const request = new XMLHttpRequest();
+	request.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200) {
+			//Success
+		}
+	};
+	request.open("GET", "http://127.0.0.1:81/setmarketratio?id=" + prosumerID + "&ratio=" + (this.value / 100), true);
+	request.send();
+};

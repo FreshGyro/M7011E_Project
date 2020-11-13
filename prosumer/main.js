@@ -27,5 +27,17 @@ app.get("/getprosumerdata", (request, response) => {
 	});
 });
 
+app.get("/setmarketratio", (request, response) => {
+	const id = parseInt(request.query.id, 10);
+	const ratio = parseFloat(request.query.ratio);
+	simulator.setMarketRatio(id, ratio).then((data) => {
+		response.json(data);
+	}).catch((error) => {
+		response.json({
+			error:error
+		});
+	});
+});
+
 app.listen(81);
 console.log("Server is running!");
