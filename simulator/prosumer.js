@@ -27,8 +27,11 @@ class Prosumer {
 		return 3000;
 	}
 
+	getWindSpeed(time) {
+		return weather.getWindSpeed(this._posX, this._posY, time);
+	}
 	getProduction(time) {
-		return 1600 * weather.getWindSpeed(this._posX, this._posY, time);//Watts
+		return 1600 * this.getWindSpeed(time);
 	}
 
 	getConsumption() {
