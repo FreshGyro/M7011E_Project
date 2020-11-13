@@ -1,6 +1,8 @@
 
 const info = document.getElementById("info");
 const marketRatioSlider = document.getElementById("marketRatio");
+const imageUpload = document.getElementById("imageUpload");
+const image = document.getElementById("image");
 
 const prosumerID = 1;
 
@@ -53,3 +55,5 @@ marketRatioSlider.onchange = function() {
 	request.open("GET", "http://127.0.0.1:81/setmarketratio?id=" + prosumerID + "&ratio=" + (this.value / 100), true);
 	request.send();
 };
+
+image.src = "http://127.0.0.1:81/uploads/" + prosumerID + ".jpg";
