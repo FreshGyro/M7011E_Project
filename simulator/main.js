@@ -23,6 +23,25 @@ for(let i = 0; i < 12345; ++i) {
 	consumption.addProsumer(x, y);
 }
 
+app.get("/getprosumerdata", (request, response) => {
+	const id = parseInt(request.query.id, 10);
+	const prosumer = consumption.getProsumerById(id);
+	if(prosumer == null) {
+		response.json({
+			error:"Unknown prosumer"
+		});
+	} else {
+		response.json({
+			"wind":prosumer.getWindSpeed(consumption.getCurrentTime()),
+			"production":prosumer.getProduction(consumption.getCurrentTime()),
+			"consumption":prosumer.getConsumption(),
+			"battery":prosumer.getBatteryLevel(),
+			"max_battery":prosumer.getMaxBatteryLevel(),
+			"market_ratio":prosumer.getMarketRatio()
+		});
+	}
+});
+
 app.get("/getmarketstats", (request, response) => {
 	response.json({
 		"time":consumption.getCurrentTime(),
