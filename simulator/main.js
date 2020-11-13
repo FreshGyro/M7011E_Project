@@ -52,6 +52,28 @@ app.get("/getprosumerdata", (request, response) => {
 	}
 });
 
+app.get("/setmarketratio", (request, response) => {
+	const id = parseInt(request.query.id, 10);
+	const ratio = parseFloat(request.query.ratio);
+	if(ratio < 0 && ratio > 1) {
+		response.json({
+			error:"Invalid ratio"
+		});
+	} else {
+		const prosumer = consumption.getProsumerById(id);
+		if(prosumer == null) {
+			response.json({
+				error:"Unknown prosumer"
+			});
+		} else {
+			prosumer.setMarketRatio(ratio);
+			response.json({
+				success:true
+			});
+		}
+	}
+});
+
 app.get("/getmarketstats", (request, response) => {
 	response.json({
 		"time":consumption.getCurrentTime(),

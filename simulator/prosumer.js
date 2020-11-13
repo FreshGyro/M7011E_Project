@@ -10,6 +10,9 @@ class Prosumer {
 		this._marketRatio = 0.3;
 	}
 
+	setMarketRatio(ratio) {
+		this._marketRatio = ratio;
+	}
 	getMarketRatio() {
 		return this._marketRatio;
 	}
