@@ -1,14 +1,15 @@
 
 const Prosumer = require("./prosumer.js");
+const PowerPlant = require("./power_plant.js");
 
 const prosumers = [];
 let nextProsumerID = 0;
 const prosumerMap = new Map();
 
-function addProsumer(x, y) {
-	const p = new Prosumer(x, y);
-	prosumerMap.set(nextProsumerID++, p);
-	prosumers.push(p);
+function addProsumer(prosumer) {
+	prosumers.push(prosumer);
+	prosumerMap.set(nextProsumerID++, prosumer);
+	prosumers.push(prosumer);
 }
 module.exports.addProsumer = addProsumer;
 
@@ -16,6 +17,9 @@ function getProsumerById(id) {
 	return prosumerMap.get(id);
 }
 module.exports.getProsumerById = getProsumerById;
+
+const powerPlant = new PowerPlant();
+addProsumer(powerPlant);
 
 let totalMarketProduction = 0;
 let totalMarketDemand = 0;
