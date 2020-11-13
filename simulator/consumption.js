@@ -1,12 +1,16 @@
 
 const Prosumer = require("./prosumer.js");
+const PowerPlant = require("./power_plant.js");
 
 const prosumers = [];
+const powerPlant = new PowerPlant();
 
-function addProsumer(x, y) {
-	prosumers.push(new Prosumer(x, y));
+function addProsumer(prosumer) {
+	prosumers.push(prosumer);
 }
 module.exports.addProsumer = addProsumer;
+
+addProsumer(powerPlant);
 
 let totalMarketProduction = 0;
 let totalMarketDemand = 0;

@@ -1,6 +1,8 @@
 
 console.log("Starting server...");
 
+const Prosumer = require("./prosumer.js");
+
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -20,7 +22,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 for(let i = 0; i < 12345; ++i) {
 	const x = Math.random() * 100000;
 	const y = Math.random() * 100000;
-	consumption.addProsumer(x, y);
+	consumption.addProsumer(new Prosumer(x, y));
 }
 
 app.get("/getmarketstats", (request, response) => {
