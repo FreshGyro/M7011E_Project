@@ -2,6 +2,7 @@
 console.log("Starting server...");
 
 const Prosumer = require("./prosumer.js");
+const Consumer = require("./consumer.js");
 
 const cors = require("cors");
 const express = require("express");
@@ -18,11 +19,18 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-//Random customers
+//Random prosumers
 for(let i = 0; i < 12345; ++i) {
 	const x = Math.random() * 100000;
 	const y = Math.random() * 100000;
 	consumption.addProsumer(new Prosumer(x, y));
+}
+
+//Random consumers
+for(let i = 0; i < 420; ++i) {
+	const x = Math.random() * 100000;
+	const y = Math.random() * 100000;
+	consumption.addProsumer(new Consumer(x, y));
 }
 
 app.get("/getprosumerdata", (request, response) => {
