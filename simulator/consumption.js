@@ -1,5 +1,4 @@
 
-const Prosumer = require("./prosumer.js");
 const PowerPlant = require("./power_plant.js");
 
 const prosumers = [];
