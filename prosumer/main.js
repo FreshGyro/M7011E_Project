@@ -45,10 +45,12 @@ app.get("/setmarketratio", (request, response) => {
 app.post("/uploadimage", multer.single("photo"), (request, response) => {
 	const id = parseInt(request.query.id, 10);
 	fs.rename(request.file.path, "./uploads/" + id + ".jpg", (error) => {
-		console.error(error);
+		if(error) {
+			console.error(error);
+		}
 	});
 
-	return response.json({
+	response.json({
 		success:true
 	});
 });

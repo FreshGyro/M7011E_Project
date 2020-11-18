@@ -19,10 +19,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.post("/uploadimage", multer.single("photo"), (request, response) => {
 	fs.rename(request.file.path, "./uploads/manager.jpg", (error) => {
-		console.error(error);
+		if(error) {
+			console.error(error);
+		}
 	});
 
-	return response.json({
+	response.json({
 		success:true
 	});
 });
