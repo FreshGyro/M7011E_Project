@@ -10,6 +10,9 @@
 		</style>
 	</head>
 	<body>
+		<canvas id="market-chart"></canvas>
+		<canvas id="battery-chart"></canvas>
+
 		Upload image:
 		<form action="http://127.0.0.1:82/uploadimage" method="post" enctype="multipart/form-data">
 			<input type="file" accept="image/*" name="photo">
@@ -17,6 +20,9 @@
 		</form>
 		<img id="image">
 
+		<script src="chart.min.js"></script>
+		<script src="battery.js"></script>
+		<script src="market.js"></script>
 		<script src="main.js"></script>
 	</body>
 </html>
