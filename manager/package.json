@@ -1,5 +1,5 @@
 {
-	"name": "M7011EProsumer",
+	"name": "M7011EManager",
 	"private": true,
 	"main": "main.js",
 	"dependencies": {
