@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer")({dest:"./uploads"});
 const fs = require("fs");
 
+const login = require("./login.js");
 const simulator = require("./simulator.js");
 
 const app = express();
@@ -19,10 +20,14 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.get("/getprosumerdata", (request, response) => {
-	const id = parseInt(request.query.id, 10);
-	simulator.getProsumerData(id).then((data) => {
-		response.json(data);
+
+app.post("/register", (request, response) => {
+	const username = request.body.username;
+	const password = request.body.password;
+	login.registerUser(username, password, simulator).then(() => {
+		response.json({
+			success:true
+		});
 	}).catch((error) => {
 		response.json({
 			error:error
@@ -30,11 +35,36 @@ app.get("/getprosumerdata", (request, response) => {
 	});
 });
 
-app.get("/setmarketratio", (request, response) => {
-	const id = parseInt(request.query.id, 10);
-	const ratio = parseFloat(request.query.ratio);
-	simulator.setMarketRatio(id, ratio).then((data) => {
-		response.json(data);
+app.post("/getprosumerdata", (request, response) => {
+	const username = request.body.username;
+	const password = request.body.password;
+	login.loginUser(username, password).then((userID) => {
+		simulator.getProsumerData(userID).then((data) => {
+			response.json(data);
+		}).catch((error) => {
+			response.json({
+				error:error
+			});
+		});
+	}).catch((error) => {
+		response.json({
+			error:error
+		});
+	});
+});
+
+app.post("/setmarketratio", (request, response) => {
+	const username = request.body.username;
+	const password = request.body.password;
+	login.loginUser(username, password).then((userID) => {
+		const ratio = parseFloat(request.query.ratio);
+		simulator.setMarketRatio(userID, ratio).then((data) => {
+			response.json(data);
+		}).catch((error) => {
+			response.json({
+				error:error
+			});
+		});
 	}).catch((error) => {
 		response.json({
 			error:error
@@ -43,16 +73,38 @@ app.get("/setmarketratio", (request, response) => {
 });
 
 app.post("/uploadimage", multer.single("photo"), (request, response) => {
-	const id = parseInt(request.query.id, 10);
-	fs.rename(request.file.path, "./uploads/" + id + ".jpg", (error) => {
-		if(error) {
-			console.error(error);
-		}
-	});
+	const username = request.body.username;
+	const password = request.body.password;
+	login.loginUser(username, password).then((userID) => {
+		fs.rename(request.file.path, "./uploads/" + userID + ".jpg", (error) => {
+			if(error) {
+				console.error(error);
+			}
+		});
 
-	response.json({
-		success:true
+		response.json({
+			success:true
+		});
+	}).catch((error) => {
+		response.json({
+			error:error
+		});
 	});
+});
+
+app.post("/getimageurl", (request, response) => {
+	const username = request.body.username;
+	const password = request.body.password;
+	const userID = login.usernameToID(username);
+	if(userID == null) {
+		response.json({
+			"error":"Invalid username"
+		});
+	} else {
+		response.json({
+			"url":"uploads/" + userID + ".jpg"
+		});
+	}
 });
 
 app.listen(81);
