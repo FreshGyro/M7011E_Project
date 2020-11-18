@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Prosumer interface</title>
+		<title>Manager interface</title>
 		<style>
 			#image {
 				width:256px;
@@ -10,11 +10,8 @@
 		</style>
 	</head>
 	<body>
-		<p id="info"></p>
-		Set market ratio: <input id="marketRatio" type="range">
-		<br>
 		Upload image:
-		<form action="http://127.0.0.1:81/uploadimage?id=1" method="post" enctype="multipart/form-data">
+		<form action="http://127.0.0.1:82/uploadimage" method="post" enctype="multipart/form-data">
 			<input type="file" accept="image/*" name="photo">
 			<input type="submit">
 		</form>

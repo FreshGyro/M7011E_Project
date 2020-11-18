@@ -18,7 +18,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.post("/uploadimage", multer.single("photo"), (request, response) => {
-	const id = parseInt(request.query.id, 10);
 	fs.rename(request.file.path, "./uploads/manager.jpg", (error) => {
 		console.error(error);
 	});
