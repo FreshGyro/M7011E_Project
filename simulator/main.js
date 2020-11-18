@@ -33,6 +33,16 @@ for(let i = 0; i < 420; ++i) {
 	consumption.addProsumer(new Consumer(x, y));
 }
 
+app.get("/createprosumer", (request, response) => {
+	const x = Math.random() * 100000;
+	const y = Math.random() * 100000;
+	const id = consumption.addProsumer(new Prosumer(x, y));
+
+	response.json({
+		id:id
+	});
+});
+
 app.get("/getprosumerdata", (request, response) => {
 	const id = parseInt(request.query.id, 10);
 	const prosumer = consumption.getProsumerById(id);

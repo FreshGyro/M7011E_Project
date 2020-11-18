@@ -10,12 +10,24 @@
 		</style>
 	</head>
 	<body>
+		<h2>Register</h2>
+		<form action="http://127.0.0.1:81/register" method="post">
+			Username: <input type="text" name="username">
+			Password: <input type="password" name="password">
+			<input type="submit">
+		</form>
+		<h2>Login</h2>
+		Username: <input id="username" type="text" name="username">
+		Password: <input id="password" type="password" name="password">
+		<h2>Info</h2>
 		<p id="info"></p>
 		Set market ratio: <input id="marketRatio" type="range">
 		<br>
 		Upload image:
 		<form action="http://127.0.0.1:81/uploadimage?id=1" method="post" enctype="multipart/form-data">
 			<input type="file" accept="image/*" name="photo">
+			Username: <input type="text" name="username">
+			Password: <input type="password" name="password">
 			<input type="submit">
 		</form>
 		<img id="image">
