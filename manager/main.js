@@ -29,6 +29,16 @@ app.get("/getpowerplantdata", (request, response) => {
 	});
 });
 
+app.get("/setpowerplantenabled", (request, response) => {
+	simulator.setPowerPlantEnabled(request.query.enabled).then((data) => {
+		response.json(data);
+	}).catch((error) => {
+		response.json({
+			error:error
+		});
+	});
+});
+
 app.post("/uploadimage", multer.single("photo"), (request, response) => {
 	fs.rename(request.file.path, "./uploads/manager.jpg", (error) => {
 		if(error) {

@@ -38,19 +38,23 @@ class PowerPlant extends Prosumer {
 		return this._isOn;
 	}
 	turnOn(time) {
-		if(!this.isOn() && (time - this._timestamp) < 3) {
-			this._timestamp = time;
+		if(!this.isOn()) {
 			this._isOn = true;
-		} else {
-			this._timestamp = -Infinity;
+			if((time - this._timestamp) >= 3) {
+				this._timestamp = time;
+			} else {
+				this._timestamp = -Infinity;
+			}
 		}
 	}
 	turnOff(time) {
-		if(this.isOn() && (time - this._timestamp) >= 3) {
-			this._timestamp = time;
+		if(this.isOn()) {
 			this._isOn = false;
-		} else {
-			this._timestamp = -Infinity;
+			if((time - this._timestamp) >= 3) {
+				this._timestamp = time;
+			} else {
+				this._timestamp = -Infinity;
+			}
 		}
 	}
 }

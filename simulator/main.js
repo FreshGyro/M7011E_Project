@@ -112,6 +112,18 @@ app.get("/getpowerplantdata", (request, response) => {
 	});
 });
 
+app.get("/setpowerplantenabled", (request, response) => {
+	const enabled = (request.query.enabled == "true");
+	const time = consumption.getCurrentTime();
+	const powerPlant = consumption.getPowerPlant();
+	if(enabled) {
+		powerPlant.turnOn(time);
+	} else {
+		powerPlant.turnOff(time);
+	}
+	response.json({"success":true});
+});
+
 app.get("/windspeed", (request, response) => {
 	const x = parseFloat(request.query.x);
 	const y = parseFloat(request.query.y);
