@@ -100,6 +100,18 @@ app.get("/getbatterystats", (request, response) => {
 	});
 });
 
+app.get("/getpowerplantdata", (request, response) => {
+	const time = consumption.getCurrentTime();
+	const powerPlant = consumption.getPowerPlant();
+	response.json({
+		"status":powerPlant.getStatus(time),
+		"production":powerPlant.getProduction(time),
+		"consumption":powerPlant.getConsumption(),
+		"battery":powerPlant.getBatteryLevel(),
+		"max_battery":powerPlant.getMaxBatteryLevel()
+	});
+});
+
 app.get("/windspeed", (request, response) => {
 	const x = parseFloat(request.query.x);
 	const y = parseFloat(request.query.y);

@@ -22,6 +22,11 @@ module.exports.getProsumerById = getProsumerById;
 const powerPlant = new PowerPlant();
 addProsumer(powerPlant);
 
+function getPowerPlant() {
+	return powerPlant;
+}
+module.exports.getPowerPlant = getPowerPlant;
+
 let totalMarketProduction = 0;
 let totalMarketDemand = 0;
 

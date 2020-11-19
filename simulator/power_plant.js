@@ -22,6 +22,18 @@ class PowerPlant extends Prosumer {
 		}
 	}
 
+	getStatus(time) {
+		if(this.isOn() && (time - this._timestamp) < 3) {
+			return "STARTING";
+		} else if(this.isOn() && (time - this._timestamp) >= 3) {
+			return "STARTED";
+		} else if(!this.isOn() && (time - this._timestamp) < 3) {
+			return "STOPPING";
+		} else {
+			return "STOPPED";
+		}
+	}
+
 	isOn() {
 		return this._isOn;
 	}
