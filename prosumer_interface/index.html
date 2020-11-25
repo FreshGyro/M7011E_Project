@@ -4,6 +4,76 @@
 	<head>
 		<title>Prosumer interface</title>
 		<style>
+			#info {
+				margin:50px 0 0 0;
+				padding:0;
+			}
+
+			#info > .window {
+				display:inline-block;
+				margin:0;
+				padding:0;
+				width:250px;
+				height:300px;
+				vertical-align:middle;
+			}
+			#info > .window > img {
+				display:block;
+				margin:20px auto;
+				width:150px;
+				-webkit-filter:drop-shadow(1px 1px 0 #000);
+				filter:drop-shadow(1px 1px 0 #000);
+			}
+			#info > .window > .input {
+				margin:0;
+				padding:6px 4px 4px 4px;
+				background-color:#fff;
+				border-radius:8px;
+			}
+
+			#info > .connection {
+				display:inline-block;
+				width:50px;
+				height:50px;
+				box-shadow:4px 4px 4px rgba(0,0,50,0.3);
+				border-top:2px solid rgba(0,50,100,0.25);
+				border-bottom:2px solid rgba(0,50,100,0.25);
+				vertical-align:middle;
+				overflow:hidden;
+			}
+			#info > .connection > div {
+				margin:0;
+				padding:0;
+				width:200%;
+				height:100%;
+				background:url("connection.png");
+				animation-duration:1s;
+				animation-timing-function:linear;
+				animation-iteration-count:infinite;
+			}
+			#info > .connection.left > div {
+				animation-name:connection-left;
+			}
+			@keyframes connection-left {
+				from {
+					transform:translateX(0);
+				}
+				to {
+					transform:translateX(-48%);
+				}
+			}
+			#info > .connection.right > div {
+				animation-name:connection-right;
+			}
+			@keyframes connection-right {
+				from {
+					transform:translateX(-48%);
+				}
+				to {
+					transform:translateX(0);
+				}
+			}
+
 			#image {
 				width:256px;
 			}
@@ -12,9 +82,20 @@
 	</head>
 	<body>
 		<div id="background"></div>
-		<h2>Info</h2>
-		<p id="info"></p>
-		Set market ratio: <input id="marketRatio" type="range">
+
+		<div id="info">
+			<div class="window"><img src="consumption.svg"><h2>Consumption</h2><p></p>
+			</div><div class="connection left"><div></div>
+			</div><div class="window"><img src="battery.svg"><h2>Battery</h2><p></p>
+			</div><div class="connection left"><div></div>
+			</div><div class="window"><img src="production.svg"><h2>Production</h2><p></p>
+			</div><div class="connection right"><div></div>
+			</div><div class="window"><img src="market.svg"><h2>Market</h2><span class="input"><input id="marketRatio" type="range"></span></div>
+		</div>
+
+		<br>
+		<br>
+		<br>
 		<br>
 		Upload image:
 		<form action="http://127.0.0.1:81/uploadimage?id=1" method="post" enctype="multipart/form-data">
@@ -26,6 +107,7 @@
 		<img id="image">
 
 		<script src="account.js"></script>
+		<script src="info.js"></script>
 		<script src="main.js"></script>
 	</body>
 </html>

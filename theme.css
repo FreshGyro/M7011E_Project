@@ -20,3 +20,10 @@ html, body {
 	background:#000;
 	background:linear-gradient(#7db9e8, #1e5799);
 }
+
+.window {
+	background:linear-gradient(#416A99, #306199);
+	border-radius:12px;
+	box-shadow:4px 4px 4px rgba(0,0,50,0.3);
+	border:2px solid rgba(0,50,100,0.25);
+}
