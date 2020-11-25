@@ -130,7 +130,7 @@ function getMarketDemand() {
 }
 module.exports.getMarketDemand = getMarketDemand;
 
-function getMarketPrice() {
+function getSuggestedMarketPrice() {
 	if(getMarketProduction() - getMarketDemand() > 0) {
 		return getMarketDemand() / (getMarketProduction() - getMarketDemand());
 	} else {
