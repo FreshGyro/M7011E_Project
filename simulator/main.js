@@ -108,7 +108,8 @@ app.get("/getpowerplantdata", (request, response) => {
 		"production":powerPlant.getProduction(time),
 		"consumption":powerPlant.getConsumption(),
 		"battery":powerPlant.getBatteryLevel(),
-		"max_battery":powerPlant.getMaxBatteryLevel()
+		"max_battery":powerPlant.getMaxBatteryLevel(),
+		"suggested_price":consumption.getMarketPrice()
 	});
 });
 
@@ -139,11 +140,7 @@ function update() {
 	console.log("Market production: " + consumption.getMarketProduction());
 	console.log("Market demand: " + consumption.getMarketDemand());
 	console.log("Delta: " + (consumption.getMarketProduction() - consumption.getMarketDemand()));
-	if(consumption.getMarketProduction() - consumption.getMarketDemand() > 0) {
-		console.log("Suggested price: " + consumption.getMarketDemand() / (consumption.getMarketProduction() - consumption.getMarketDemand()));
-	} else {
-		console.log("Suggested price: " + consumption.getMarketDemand()**1.1);
-	}
+	console.log("Suggested price: " + consumption.getMarketPrice());
 }
 
 setInterval(() => {

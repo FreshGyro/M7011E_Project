@@ -129,3 +129,12 @@ function getMarketDemand() {
 	return totalMarketDemand;
 }
 module.exports.getMarketDemand = getMarketDemand;
+
+function getMarketPrice() {
+	if(getMarketProduction() - getMarketDemand() > 0) {
+		return getMarketDemand() / (getMarketProduction() - getMarketDemand());
+	} else {
+		return getMarketDemand()**1.1;
+	}
+}
+module.exports.getMarketPrice = getMarketPrice;

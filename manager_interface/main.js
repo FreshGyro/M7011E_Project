@@ -16,7 +16,8 @@ function updateInfo() {
 					"Consumption",
 					"Delta",
 					"Battery",
-					"Max Battery"
+					"Max Battery",
+					"Suggested Price"
 				];
 				const values = [
 					json["status"],
@@ -24,7 +25,8 @@ function updateInfo() {
 					json["consumption"],
 					json["production"] - json["consumption"],
 					json["battery"],
-					json["max_battery"]
+					json["max_battery"],
+					json["suggested_price"]
 				];
 
 				for(let i = 0; i < keys.length; ++i) {
