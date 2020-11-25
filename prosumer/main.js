@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer")({dest:"./uploads"});
 const fs = require("fs");
 
+const activity = require("./activity.js");
 const login = require("./login.js");
 const simulator = require("./simulator.js");
 
@@ -20,11 +21,16 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+const users = new Map();
 
 app.post("/register", (request, response) => {
 	const username = request.body.username;
 	const password = request.body.password;
-	login.registerUser(username, password, simulator).then(() => {
+	login.registerUser(username, password, simulator).then((userID) => {
+		users.set(userID, {
+			id:userID,
+			username:username
+		});
 		response.json({
 			success:true
 		});
@@ -39,6 +45,7 @@ app.post("/getprosumerdata", (request, response) => {
 	const username = request.body.username;
 	const password = request.body.password;
 	login.loginUser(username, password).then((userID) => {
+		activity.userHeartbeat(userID);
 		simulator.getProsumerData(userID).then((data) => {
 			response.json(data);
 		}).catch((error) => {
@@ -57,6 +64,7 @@ app.post("/setmarketratio", (request, response) => {
 	const username = request.body.username;
 	const password = request.body.password;
 	login.loginUser(username, password).then((userID) => {
+		activity.userHeartbeat(userID);
 		const ratio = parseFloat(request.query.ratio);
 		simulator.setMarketRatio(userID, ratio).then((data) => {
 			response.json(data);
@@ -76,6 +84,7 @@ app.post("/uploadimage", multer.single("photo"), (request, response) => {
 	const username = request.body.username;
 	const password = request.body.password;
 	login.loginUser(username, password).then((userID) => {
+		activity.userHeartbeat(userID);
 		fs.rename(request.file.path, "./uploads/" + userID + ".jpg", (error) => {
 			if(error) {
 				console.error(error);
@@ -105,6 +114,19 @@ app.post("/getimageurl", (request, response) => {
 			"url":"uploads/" + userID + ".jpg"
 		});
 	}
+});
+
+app.get("/getprosumerlist", (request, response) => {
+	const json = [];
+	users.forEach((user) => {
+		json.push({
+			id:user.id,
+			username:user.username,
+			isActive:activity.isUserActive(user.id)
+		});
+	});
+
+	response.json(json);
 });
 
 app.listen(81);

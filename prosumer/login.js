@@ -16,7 +16,7 @@ function registerUser(username, password, simulator) {
 				simulator.createProsumer().then((id) => {
 					userIDs.set(username, id);
 					users.set(username, hash);
-					resolve();
+					resolve(id);
 				}).catch((error) => {
 					reject("Failed to create prosumer: " + error);
 				});
