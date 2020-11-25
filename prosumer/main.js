@@ -41,6 +41,21 @@ app.post("/register", (request, response) => {
 	});
 });
 
+app.post("/login", (request, response) => {
+	const username = request.body.username;
+	const password = request.body.password;
+	login.loginUser(username, password).then((userID) => {
+		activity.userHeartbeat(userID);
+		response.json({
+			success:true
+		});
+	}).catch((error) => {
+		response.json({
+			error:error
+		});
+	});
+});
+
 app.post("/getprosumerdata", (request, response) => {
 	const username = request.body.username;
 	const password = request.body.password;
@@ -65,7 +80,7 @@ app.post("/setmarketratio", (request, response) => {
 	const password = request.body.password;
 	login.loginUser(username, password).then((userID) => {
 		activity.userHeartbeat(userID);
-		const ratio = parseFloat(request.query.ratio);
+		const ratio = parseFloat(request.body.ratio);
 		simulator.setMarketRatio(userID, ratio).then((data) => {
 			response.json(data);
 		}).catch((error) => {

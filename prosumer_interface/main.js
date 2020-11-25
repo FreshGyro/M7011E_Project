@@ -1,7 +1,4 @@
 
-const usernameField = document.getElementById("username");
-const passwordField = document.getElementById("password");
-
 const info = document.getElementById("info");
 const marketRatioSlider = document.getElementById("marketRatio");
 const imageUpload = document.getElementById("imageUpload");
@@ -49,7 +46,7 @@ function updateInfo() {
 	};
 	request.open("POST", "http://127.0.0.1:81/getprosumerdata", true);
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	request.send("username=" + usernameField.value + "&password=" + passwordField.value);
+	request.send("username=" + account.getUsername() + "&password=" + account.getPasswordHash());
 }
 setInterval(updateInfo, 1000);
 
@@ -62,7 +59,7 @@ marketRatioSlider.onchange = function() {
 	};
 	request.open("POST", "http://127.0.0.1:81/setmarketratio", true);
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	request.send("ratio=" + (this.value / 100) + "&username=" + usernameField.value + "&password=" + passwordField.value);
+	request.send("ratio=" + (parseFloat(this.value) / 100) + "&username=" + account.getUsername() + "&password=" + account.getPasswordHash());
 };
 
 function updateImage() {
@@ -79,6 +76,6 @@ function updateImage() {
 	};
 	request.open("POST", "http://127.0.0.1:81/getimageurl", true);
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	request.send("username=" + usernameField.value);
+	request.send("username=" + account.getUsername());
 }
 setInterval(updateImage, 1000);
