@@ -39,6 +39,16 @@ app.get("/setpowerplantenabled", (request, response) => {
 	});
 });
 
+app.get("/setmarketprice", (request, response) => {
+	simulator.setMarketPrice(request.query.price).then((data) => {
+		response.json(data);
+	}).catch((error) => {
+		response.json({
+			error:error
+		});
+	});
+});
+
 app.post("/uploadimage", multer.single("photo"), (request, response) => {
 	fs.rename(request.file.path, "./uploads/manager.jpg", (error) => {
 		if(error) {
