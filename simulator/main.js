@@ -57,7 +57,8 @@ app.get("/getprosumerdata", (request, response) => {
 			"consumption":prosumer.getConsumption(),
 			"battery":prosumer.getBatteryLevel(),
 			"max_battery":prosumer.getMaxBatteryLevel(),
-			"market_ratio":prosumer.getMarketRatio()
+			"market_ratio":prosumer.getMarketRatio(),
+			"market_price":consumption.getMarketPrice()
 		});
 	}
 });
@@ -123,7 +124,8 @@ app.get("/getpowerplantdata", (request, response) => {
 		"consumption":powerPlant.getConsumption(),
 		"battery":powerPlant.getBatteryLevel(),
 		"max_battery":powerPlant.getMaxBatteryLevel(),
-		"suggested_price":consumption.getSuggestedMarketPrice()
+		"suggested_price":consumption.getSuggestedMarketPrice(),
+		"market_price":consumption.getMarketPrice()
 	});
 });
 
@@ -155,6 +157,7 @@ function update() {
 	console.log("Market demand: " + consumption.getMarketDemand());
 	console.log("Delta: " + (consumption.getMarketProduction() - consumption.getMarketDemand()));
 	console.log("Suggested price: " + consumption.getSuggestedMarketPrice());
+	console.log("Current price: " + consumption.getMarketPrice());
 }
 
 setInterval(() => {

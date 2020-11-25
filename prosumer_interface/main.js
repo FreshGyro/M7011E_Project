@@ -23,7 +23,8 @@ function updateInfo() {
 					"Delta",
 					"Battery",
 					"Max Battery",
-					"Market Ratio"
+					"Market Ratio",
+					"Market Price"
 				];
 				const values = [
 					json["wind"],
@@ -32,7 +33,8 @@ function updateInfo() {
 					json["production"] - json["consumption"],
 					json["battery"],
 					json["max_battery"],
-					json["market_ratio"]
+					json["market_ratio"],
+					json["market_price"]
 				];
 
 				for(let i = 0; i < keys.length; ++i) {
