@@ -65,7 +65,7 @@ app.post("/setmarketratio", (request, response) => {
 	const password = request.body.password;
 	login.loginUser(username, password).then((userID) => {
 		activity.userHeartbeat(userID);
-		const ratio = parseFloat(request.query.ratio);
+		const ratio = parseFloat(request.body.ratio);
 		simulator.setMarketRatio(userID, ratio).then((data) => {
 			response.json(data);
 		}).catch((error) => {
