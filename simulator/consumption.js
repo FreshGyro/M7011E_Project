@@ -29,6 +29,7 @@ module.exports.getPowerPlant = getPowerPlant;
 
 let totalMarketProduction = 0;
 let totalMarketDemand = 0;
+let marketPrice = 0;
 
 let currentTime = 0;
 function update() {
@@ -130,11 +131,21 @@ function getMarketDemand() {
 }
 module.exports.getMarketDemand = getMarketDemand;
 
-function getMarketPrice() {
+function getSuggestedMarketPrice() {
 	if(getMarketProduction() - getMarketDemand() > 0) {
 		return getMarketDemand() / (getMarketProduction() - getMarketDemand());
 	} else {
 		return getMarketDemand()**1.1;
 	}
 }
+module.exports.getSuggestedMarketPrice = getSuggestedMarketPrice;
+
+function getMarketPrice() {
+	return marketPrice;
+}
 module.exports.getMarketPrice = getMarketPrice;
+
+function setMarketPrice(price) {
+	marketPrice = price;
+}
+module.exports.setMarketPrice = setMarketPrice;

@@ -57,7 +57,8 @@ app.get("/getprosumerdata", (request, response) => {
 			"consumption":prosumer.getConsumption(),
 			"battery":prosumer.getBatteryLevel(),
 			"max_battery":prosumer.getMaxBatteryLevel(),
-			"market_ratio":prosumer.getMarketRatio()
+			"market_ratio":prosumer.getMarketRatio(),
+			"market_price":consumption.getMarketPrice()
 		});
 	}
 });
@@ -81,6 +82,20 @@ app.get("/setmarketratio", (request, response) => {
 				success:true
 			});
 		}
+	}
+});
+
+app.get("/setmarketprice", (request, response) => {
+	const price = parseInt(request.query.price, 10);
+	if(!isNaN(price)) {
+		consumption.setMarketPrice(price);
+		response.json({
+			success:true
+		});
+	} else {
+		response.json({
+			error:"Not a number"
+		});
 	}
 });
 
@@ -109,7 +124,8 @@ app.get("/getpowerplantdata", (request, response) => {
 		"consumption":powerPlant.getConsumption(),
 		"battery":powerPlant.getBatteryLevel(),
 		"max_battery":powerPlant.getMaxBatteryLevel(),
-		"suggested_price":consumption.getMarketPrice()
+		"suggested_price":consumption.getSuggestedMarketPrice(),
+		"market_price":consumption.getMarketPrice()
 	});
 });
 
@@ -140,7 +156,8 @@ function update() {
 	console.log("Market production: " + consumption.getMarketProduction());
 	console.log("Market demand: " + consumption.getMarketDemand());
 	console.log("Delta: " + (consumption.getMarketProduction() - consumption.getMarketDemand()));
-	console.log("Suggested price: " + consumption.getMarketPrice());
+	console.log("Suggested price: " + consumption.getSuggestedMarketPrice());
+	console.log("Current price: " + consumption.getMarketPrice());
 }
 
 setInterval(() => {
