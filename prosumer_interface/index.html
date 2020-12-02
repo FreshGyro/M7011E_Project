@@ -81,8 +81,22 @@
 				}
 			}
 
+			.image.window {
+				margin:10px auto;
+				padding:15px 30px 30px 30px;
+				width:400px;
+			}
+			.image.window > h2 {
+				margin:5px;
+				padding:0;
+			}
 			#image {
-				width:256px;
+				width:100%;
+				border-radius:12px;
+				border:2px solid rgba(0,50,100,0.25);
+			}
+			#image-upload {
+				display:none;
 			}
 		</style>
 		<link rel="stylesheet" href="/theme.css">
@@ -106,18 +120,13 @@
 		<br>
 		<br>
 		<br>
-		Upload image:
-		<form action="http://127.0.0.1:81/uploadimage?id=1" method="post" enctype="multipart/form-data">
-			<input type="file" accept="image/*" name="photo">
-			Username: <input type="text" name="username">
-			Password: <input type="password" name="password">
-			<input type="submit">
-		</form>
-		<img id="image">
+		<div class="image window"><h2>Image</h2><img id="image"><button id="image-upload-button" class="button">Upload image</button></div>
+		<input id="image-upload" type="file" accept="image/*" name="photo">
 
 		<script src="account.js"></script>
 		<script src="info.js"></script>
 		<script src="title.js"></script>
+		<script src="image.js"></script>
 		<script src="main.js"></script>
 	</body>
 </html>

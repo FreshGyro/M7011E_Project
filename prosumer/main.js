@@ -100,7 +100,7 @@ app.post("/uploadimage", multer.single("photo"), (request, response) => {
 	const password = request.body.password;
 	login.loginUser(username, password).then((userID) => {
 		activity.userHeartbeat(userID);
-		fs.rename(request.file.path, "./uploads/" + userID + ".jpg", (error) => {
+		fs.rename(request.file.path, "./uploads/" + encodeURIComponent(username) + ".jpg", (error) => {
 			if(error) {
 				console.error(error);
 			}
@@ -114,21 +114,6 @@ app.post("/uploadimage", multer.single("photo"), (request, response) => {
 			error:error
 		});
 	});
-});
-
-app.post("/getimageurl", (request, response) => {
-	const username = request.body.username;
-	const password = request.body.password;
-	const userID = login.usernameToID(username);
-	if(userID == null) {
-		response.json({
-			"error":"Invalid username"
-		});
-	} else {
-		response.json({
-			"url":"uploads/" + userID + ".jpg"
-		});
-	}
 });
 
 app.get("/getprosumerlist", (request, response) => {
