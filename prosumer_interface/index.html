@@ -4,6 +4,13 @@
 	<head>
 		<title>Prosumer interface</title>
 		<style>
+			#title {
+				display:inline-block;
+				margin:50px;
+				padding:0;
+				font-size:40px;
+			}
+
 			#info {
 				margin:50px 0 0 0;
 				padding:0;
@@ -83,6 +90,8 @@
 	<body>
 		<div id="background"></div>
 
+		<h1 id="title"></h1>
+
 		<div id="info">
 			<div class="window"><img src="consumption.svg"><h2>Consumption</h2><p></p>
 			</div><div class="connection left"><div></div>
@@ -108,6 +117,7 @@
 
 		<script src="account.js"></script>
 		<script src="info.js"></script>
+		<script src="title.js"></script>
 		<script src="main.js"></script>
 	</body>
 </html>
