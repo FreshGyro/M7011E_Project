@@ -4,9 +4,28 @@
 	<head>
 		<title>Manager interface</title>
 		<style>
+			#title {
+				display:inline-block;
+				margin:50px;
+				padding:0;
+				font-size:40px;
+			}
+
 			h2 {
 				margin:0;
 				padding:0;
+			}
+
+			#market-chart-window, #battery-chart-window {
+				display:inline-block;
+				margin:10px;
+				padding:20px;
+				width:40%;
+			}
+
+			#market-chart, #battery-chart {
+				width:100%;
+				background-color:#fff;
 			}
 
 			#image {
@@ -34,9 +53,9 @@
 		<link rel="stylesheet" href="/theme.css">
 	</head>
 	<body>
+		<h1 id="title">Manager interface</h1>
+
 		<div id="background"></div>
-		<canvas id="market-chart"></canvas>
-		<canvas id="battery-chart"></canvas>
 
 		<h2>Info</h2>
 		<p id="info"></p>
@@ -57,6 +76,14 @@
 			<input type="submit">
 		</form>
 		<img id="image">
+
+		<h2>Prosumer statistics</h2>
+		<div>
+			<div id="market-chart-window" class="window"><canvas id="market-chart"></canvas></div>
+			<div id="battery-chart-window" class="window"><canvas id="battery-chart"></canvas></div>
+		</div>
+		<br>
+		<br>
 
 		<h2>Prosumers</h2>
 		<div id="prosumer-list" class="window">
