@@ -31,5 +31,8 @@
 	function refreshImage() {
 		image.src = "http://127.0.0.1:81/uploads/" + encodeURIComponent(account.getUsername()) + ".jpg";
 	}
+	image.onerror = function() {
+		this.src = "/prosumer_interface/no_image.svg";
+	};
 	refreshImage();
 })();
