@@ -30,7 +30,7 @@
 				padding:0;
 			}
 
-			#info > .window {
+			#info > div > .window {
 				display:inline-block;
 				margin:0;
 				padding:0;
@@ -38,7 +38,7 @@
 				height:320px;
 				vertical-align:middle;
 			}
-			#info > .window > img {
+			#info > div > .window > img {
 				display:block;
 				margin:20px auto;
 				width:150px;
@@ -52,27 +52,50 @@
 				border-radius:8px;
 			}
 
-			#info > .connection {
+			#info .connection {
 				display:inline-block;
 				width:50px;
 				height:50px;
 				box-shadow:4px 4px 4px rgba(0,0,50,0.3);
-				border-top:2px solid rgba(0,50,100,0.25);
-				border-bottom:2px solid rgba(0,50,100,0.25);
 				vertical-align:middle;
 				overflow:hidden;
 			}
-			#info > .connection > div {
+			#info .connection.left, #info .connection.right {
+				border-top:2px solid rgba(0,50,100,0.25);
+				border-bottom:2px solid rgba(0,50,100,0.25);
+			}
+			#info .connection.down, #info .connection.up {
+				border-left:2px solid rgba(0,50,100,0.25);
+				border-right:2px solid rgba(0,50,100,0.25);
+			}
+			#info .connection > div {
 				margin:0;
 				padding:0;
 				width:200%;
-				height:100%;
-				background:url("connection.png");
+				height:200%;
 				animation-duration:1s;
 				animation-timing-function:linear;
 				animation-iteration-count:infinite;
 			}
-			#info > .connection.left > div {
+			#info .connection.left.green > div, #info .connection.right.green > div {
+				background:url("connection_horizontal_green.png");
+			}
+			#info .connection.down.green > div, #info .connection.up.green > div {
+				background:url("connection_vertical_green.png");
+			}
+			#info .connection.left.red > div, #info .connection.right.red > div {
+				background:url("connection_horizontal_red.png");
+			}
+			#info .connection.down.red > div, #info .connection.up.red > div {
+				background:url("connection_vertical_red.png");
+			}
+			#info .connection.left.gray > div, #info .connection.right.gray > div {
+				background:url("connection_horizontal_gray.png");
+			}
+			#info .connection.down.gray > div, #info .connection.up.gray > div {
+				background:url("connection_vertical_gray.png");
+			}
+			#info .connection.left:not(.gray) > div {
 				animation-name:connection-left;
 			}
 			@keyframes connection-left {
@@ -83,7 +106,7 @@
 					transform:translateX(-48%);
 				}
 			}
-			#info > .connection.right > div {
+			#info .connection.right:not(.gray) > div {
 				animation-name:connection-right;
 			}
 			@keyframes connection-right {
@@ -92,6 +115,28 @@
 				}
 				to {
 					transform:translateX(0);
+				}
+			}
+			#info .connection.down:not(.gray) > div {
+				animation-name:connection-down;
+			}
+			@keyframes connection-down {
+				from {
+					transform:translateY(-48%);
+				}
+				to {
+					transform:translateY(0);
+				}
+			}
+			#info .connection.up:not(.gray) > div {
+				animation-name:connection-up;
+			}
+			@keyframes connection-up {
+				from {
+					transform:translateY(0);
+				}
+				to {
+					transform:translateY(-48%);
 				}
 			}
 
@@ -125,13 +170,21 @@
 		<button id="logout_button" class="button">Logout<img src="logout.svg"></button>
 
 		<div id="info">
-			<div class="window"><img src="consumption.svg"><h2>Consumption</h2><p>- W</p>
-			</div><div class="connection left"><div></div>
-			</div><div class="window"><img src="battery.svg"><h2>Battery</h2><p>- J / - J</p>
-			</div><div class="connection left"><div></div>
-			</div><div class="window"><img src="production.svg"><h2>Production</h2><p>-% | - W</p>
-			</div><div class="connection right"><div></div>
-		</div><div class="window"><img src="market.svg"><h2>Market</h2><p>- €</p><span class="input"><input id="marketRatio" type="range"></span></div>
+			<div class="top">
+				<div class="window"><img src="consumption.svg"><h2>Consumption</h2><p>- W</p></div>
+			</div>
+			<div id="consumption-connection" class="connection up red"><div></div></div>
+			<div class="middle">
+				<div class="window"><img src="battery.svg"><h2>Battery</h2><p>- J / - J</p>
+				</div><div id="battery-connection" class="connection"><div></div>
+				</div><div class="window">
+				</div><div id="production-connection" class="connection left green"><div></div>
+				</div><div class="window"><img src="production.svg"><h2>Production</h2><p>-% | - W</p></div>
+			</div>
+			<div id="market-connection" class="connection"><div></div></div>
+			<div class="bottom">
+				<div class="window"><img src="market.svg"><h2>Market</h2><p>- €</p><span class="input"><input id="marketRatio" type="range"></span></div>
+			</div>
 		</div>
 
 		<br>

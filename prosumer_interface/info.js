@@ -7,6 +7,11 @@
 	const marketInfo = info.getElementsByTagName("p")[3];
 	const marketRatioSlider = document.getElementById("marketRatio");
 
+	const consumptionConnection = document.getElementById("consumption-connection");
+	const batteryConnection = document.getElementById("battery-connection");
+	const productionConnection = document.getElementById("production-connection");
+	const marketConnection = document.getElementById("market-connection");
+
 	function updateInfo() {
 		const request = new XMLHttpRequest();
 		request.onreadystatechange = function() {
@@ -20,6 +25,28 @@
 					productionInfo.textContent = Math.floor(json["wind"] * 100) + "% | " + Math.floor(json["production"]) + " W";
 					marketInfo.textContent = json["market_price"] + " €";
 					marketRatioSlider.value = json["market_ratio"] * 100;
+
+					if(json["consumption"] > json["production"]) {
+						if(json["battery"] > 0) {
+							batteryConnection.className = "connection right green";
+							marketConnection.className = "connection up gray";
+						} else {
+							batteryConnection.className = "connection right gray";
+							marketConnection.className = "connection up green";
+						}
+					} else if(json["consumption"] < json["production"]) {
+						if(json["battery"] < json["max_battery"] && json["market_ratio"] != 1) {
+							batteryConnection.className = "connection left red";
+						} else {
+							batteryConnection.className = "connection left gray";
+						}
+
+						if(json["market_ratio"] > 0 || json["battery"] >= json["max_battery"]) {
+							marketConnection.className = "connection down red";
+						} else {
+							marketConnection.className = "connection down gray";
+						}
+					}
 				}
 			}
 		};
