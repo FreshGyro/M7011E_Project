@@ -27,5 +27,6 @@
 		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		request.send("username=" + account.getUsername() + "&password=" + account.getPasswordHash());
 	}
+	updateInfo();
 	setInterval(updateInfo, 1000);
 })();
