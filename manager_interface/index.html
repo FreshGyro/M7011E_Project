@@ -28,8 +28,24 @@
 				background-color:#fff;
 			}
 
+			.image.window {
+				margin:10px auto 100px auto;
+				padding:15px 30px 30px 30px;
+				width:400px;
+			}
+			.image.window > h2 {
+				margin:5px;
+				padding:0;
+			}
 			#image {
-				width:256px;
+				width:100%;
+				border-radius:12px;
+				border:2px solid rgba(0,50,100,0.25);
+				-webkit-filter:drop-shadow(1px 1px 0 #000);
+				filter:drop-shadow(1px 1px 0 #000);
+			}
+			#image-upload {
+				display:none;
 			}
 
 			#prosumer-list {
@@ -70,12 +86,8 @@
 
 		<br>
 
-		Upload image:
-		<form action="http://127.0.0.1:82/uploadimage" method="post" enctype="multipart/form-data">
-			<input type="file" accept="image/*" name="photo">
-			<input type="submit">
-		</form>
-		<img id="image">
+		<div class="image window"><h2>Image</h2><img id="image"><button id="image-upload-button" class="button">Upload image</button></div>
+		<input id="image-upload" type="file" accept="image/*" name="photo">
 
 		<h2>Prosumer statistics</h2>
 		<div>
@@ -93,6 +105,7 @@
 		<script src="chart.min.js"></script>
 		<script src="battery.js"></script>
 		<script src="market.js"></script>
+		<script src="image.js"></script>
 		<script src="prosumer_list.js"></script>
 		<script src="main.js"></script>
 	</body>
