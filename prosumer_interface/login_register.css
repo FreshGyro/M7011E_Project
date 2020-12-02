@@ -1,0 +1,35 @@
+
+html, body {
+	margin:0;
+	padding:0;
+}
+
+h1 {
+	margin:0;
+	padding:20vh 0 10px 0;
+}
+
+.window {
+	margin:0 auto;
+	padding:0 0 20px 0;
+	width:400px;
+}
+
+.window > h2 {
+	margin:20px 0 0 0;
+	padding:0;
+}
+
+.window > input[type="text"], .window > input[type="password"] {
+	display:block;
+	margin:0 auto;
+	text-align:center;
+}
+
+.button.corner {
+	margin:6px;
+	position:absolute;
+	right:0;
+	top:0;
+	text-decoration:none;
+}
