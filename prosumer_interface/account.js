@@ -33,6 +33,10 @@ const account = new function() {
 		});
 	};
 
+	this.logout = function() {
+		localStorage.removeItem("prosumer_login");
+	};
+
 	this.register = function(username, password) {
 		return new Promise((resolve, reject) => {
 			sha512(password).then((passwordHash) => {
