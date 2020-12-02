@@ -4,6 +4,7 @@
 	const consumptionInfo = info.getElementsByTagName("p")[0];
 	const batteryInfo = info.getElementsByTagName("p")[1];
 	const productionInfo = info.getElementsByTagName("p")[2];
+	const marketInfo = info.getElementsByTagName("p")[3];
 	const marketRatioSlider = document.getElementById("marketRatio");
 
 	function updateInfo() {
@@ -17,6 +18,7 @@
 					consumptionInfo.textContent = Math.floor(json["consumption"]) + " W";
 					batteryInfo.textContent = Math.floor(json["battery"]) + " J / " + Math.floor(json["max_battery"]) + " J";
 					productionInfo.textContent = Math.floor(json["wind"] * 100) + "% | " + Math.floor(json["production"]) + " W";
+					marketInfo.textContent = json["market_price"] + " €";
 					marketRatioSlider.value = json["market_ratio"] * 100;
 				}
 			}
