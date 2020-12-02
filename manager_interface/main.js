@@ -42,6 +42,7 @@ function updateInfo() {
 	request.open("GET", "http://127.0.0.1:82/getpowerplantdata", true);
 	request.send();
 }
+updateInfo();
 setInterval(updateInfo, 1000);
 
 function setPowerPlantEnabled(enabled) {

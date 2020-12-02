@@ -4,8 +4,31 @@
 	<head>
 		<title>Manager interface</title>
 		<style>
+			h2 {
+				margin:0;
+				padding:0;
+			}
+
 			#image {
 				width:256px;
+			}
+
+			#prosumer-list {
+				margin:0 auto 50px auto;
+				padding:10px;
+				width:600px;
+			}
+			#prosumer-list > table {
+				width:100%;
+				border-collapse:collapse;
+			}
+			#prosumer-list > table th:first-of-type {
+				border-radius:12px;
+			}
+			#prosumer-list > table th, #prosumer-list > table td {
+				margin:0;
+				padding:10px;
+				border:2px solid #fff;
 			}
 		</style>
 		<link rel="stylesheet" href="/theme.css">
@@ -35,7 +58,10 @@
 		</form>
 		<img id="image">
 
-		<ul id="prosumer-list"></ul>
+		<h2>Prosumers</h2>
+		<div id="prosumer-list" class="window">
+			<table></table>
+		</div>
 
 		<script src="chart.min.js"></script>
 		<script src="battery.js"></script>
