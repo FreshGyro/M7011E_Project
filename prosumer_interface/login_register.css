@@ -29,7 +29,22 @@ h1 {
 .button.corner {
 	margin:6px;
 	position:absolute;
-	right:0;
+	left:0;
 	top:0;
 	text-decoration:none;
+}
+
+#exit-button {
+	position:absolute;
+	right:0;
+	top:0;
+	margin:6px;
+	padding:10px;
+	text-decoration:none;
+}
+#exit-button > img {
+	margin:0 0 0 6px;
+	padding:0;
+	width:32px;
+	vertical-align:middle;
 }
