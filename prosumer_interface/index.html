@@ -25,121 +25,6 @@
 				vertical-align:middle;
 			}
 
-			#info {
-				margin:50px 0 0 0;
-				padding:0;
-			}
-
-			#info > div > .window {
-				display:inline-block;
-				margin:0;
-				padding:0;
-				width:250px;
-				height:320px;
-				vertical-align:middle;
-			}
-			#info > div > .window > img {
-				display:block;
-				margin:20px auto;
-				width:150px;
-				-webkit-filter:drop-shadow(1px 1px 0 #000);
-				filter:drop-shadow(1px 1px 0 #000);
-			}
-			#info > .window > .input {
-				margin:0;
-				padding:6px 4px 4px 4px;
-				background-color:#fff;
-				border-radius:8px;
-			}
-
-			#info .connection {
-				display:inline-block;
-				width:50px;
-				height:50px;
-				box-shadow:4px 4px 4px rgba(0,0,50,0.3);
-				vertical-align:middle;
-				overflow:hidden;
-			}
-			#info .connection.left, #info .connection.right {
-				border-top:2px solid rgba(0,50,100,0.25);
-				border-bottom:2px solid rgba(0,50,100,0.25);
-			}
-			#info .connection.down, #info .connection.up {
-				border-left:2px solid rgba(0,50,100,0.25);
-				border-right:2px solid rgba(0,50,100,0.25);
-			}
-			#info .connection > div {
-				margin:0;
-				padding:0;
-				width:200%;
-				height:200%;
-				animation-duration:1s;
-				animation-timing-function:linear;
-				animation-iteration-count:infinite;
-			}
-			#info .connection.left.green > div, #info .connection.right.green > div {
-				background:url("connection_horizontal_green.png");
-			}
-			#info .connection.down.green > div, #info .connection.up.green > div {
-				background:url("connection_vertical_green.png");
-			}
-			#info .connection.left.red > div, #info .connection.right.red > div {
-				background:url("connection_horizontal_red.png");
-			}
-			#info .connection.down.red > div, #info .connection.up.red > div {
-				background:url("connection_vertical_red.png");
-			}
-			#info .connection.left.gray > div, #info .connection.right.gray > div {
-				background:url("connection_horizontal_gray.png");
-			}
-			#info .connection.down.gray > div, #info .connection.up.gray > div {
-				background:url("connection_vertical_gray.png");
-			}
-			#info .connection.left:not(.gray) > div {
-				animation-name:connection-left;
-			}
-			@keyframes connection-left {
-				from {
-					transform:translateX(0);
-				}
-				to {
-					transform:translateX(-48%);
-				}
-			}
-			#info .connection.right:not(.gray) > div {
-				animation-name:connection-right;
-			}
-			@keyframes connection-right {
-				from {
-					transform:translateX(-48%);
-				}
-				to {
-					transform:translateX(0);
-				}
-			}
-			#info .connection.down:not(.gray) > div {
-				animation-name:connection-down;
-			}
-			@keyframes connection-down {
-				from {
-					transform:translateY(-48%);
-				}
-				to {
-					transform:translateY(0);
-				}
-			}
-			#info .connection.up:not(.gray) > div {
-				animation-name:connection-up;
-			}
-			@keyframes connection-up {
-				from {
-					transform:translateY(0);
-				}
-				to {
-					transform:translateY(-48%);
-				}
-			}
-
 			.image.window {
 				margin:10px auto 100px auto;
 				padding:15px 30px 30px 30px;
@@ -160,6 +45,7 @@
 				display:none;
 			}
 		</style>
+		<link rel="stylesheet" href="/power_info.css">
 		<link rel="stylesheet" href="/theme.css">
 	</head>
 	<body>
@@ -169,7 +55,7 @@
 
 		<button id="logout_button" class="button">Logout<img src="logout.svg"></button>
 
-		<div id="info">
+		<div id="power-info">
 			<div class="top">
 				<div class="window"><img src="consumption.svg"><h2>Consumption</h2><p>- W</p></div>
 			</div>

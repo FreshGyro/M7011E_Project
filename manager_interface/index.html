@@ -16,6 +16,11 @@
 				padding:0;
 			}
 
+			#toggle-power-plant-button {
+				margin:0;
+				padding:0.25em 2em;
+			}
+
 			.price.window {
 				margin:70px auto;
 				padding:10px 0;
@@ -85,18 +90,31 @@
 				border:2px solid #fff;
 			}
 		</style>
+		<link rel="stylesheet" href="/power_info.css">
 		<link rel="stylesheet" href="/theme.css">
 	</head>
 	<body>
-		<h1 id="title">Manager interface</h1>
-
 		<div id="background"></div>
 
-		<h2>Info</h2>
-		<p id="info"></p>
+		<h1 id="title">Manager interface</h1>
 
-		<button id="start">Start</button>
-		<button id="stop">Stop</button>
+		<div id="power-info">
+			<div class="top">
+				<div class="window"><img src="consumption.svg"><h2>Consumption</h2><p>- W</p></div>
+			</div>
+			<div id="consumption-connection" class="connection up gray"><div></div></div>
+			<div class="middle">
+				<div class="window"><img src="battery.svg"><h2>Battery</h2><p>- J / - J</p>
+				</div><div id="battery-connection" class="connection right gray"><div></div>
+				</div><div class="window">
+				</div><div id="production-connection" class="connection left gray"><div></div>
+				</div><div class="window"><img src="production.svg"><h2>Production</h2><p>- | - W</p><button id="toggle-power-plant-button" class="button">Start</button></div>
+			</div>
+			<div id="market-connection" class="connection down gray"><div></div></div>
+			<div class="bottom">
+				<div class="window"><img src="market.svg"><h2>Market</h2></div>
+			</div>
+		</div>
 
 		<div class="price window">
 			<h2>Market price</h2>

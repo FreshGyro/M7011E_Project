@@ -1,0 +1,115 @@
+
+#power-info {
+	margin:50px 0 0 0;
+	padding:0;
+}
+
+#power-info > div > .window {
+	display:inline-block;
+	margin:0;
+	padding:0;
+	width:250px;
+	height:320px;
+	vertical-align:middle;
+}
+#power-info > div > .window > img {
+	display:block;
+	margin:20px auto;
+	width:150px;
+	-webkit-filter:drop-shadow(1px 1px 0 #000);
+	filter:drop-shadow(1px 1px 0 #000);
+}
+#power-info > .window > .input {
+	margin:0;
+	padding:6px 4px 4px 4px;
+	background-color:#fff;
+	border-radius:8px;
+}
+
+#power-info .connection {
+	display:inline-block;
+	width:50px;
+	height:50px;
+	box-shadow:4px 4px 4px rgba(0,0,50,0.3);
+	vertical-align:middle;
+	overflow:hidden;
+}
+#power-info .connection.left, #power-info .connection.right {
+	border-top:2px solid rgba(0,50,100,0.25);
+	border-bottom:2px solid rgba(0,50,100,0.25);
+}
+#power-info .connection.down, #power-info .connection.up {
+	border-left:2px solid rgba(0,50,100,0.25);
+	border-right:2px solid rgba(0,50,100,0.25);
+}
+#power-info .connection > div {
+	margin:0;
+	padding:0;
+	width:200%;
+	height:200%;
+	animation-duration:1s;
+	animation-timing-function:linear;
+	animation-iteration-count:infinite;
+}
+#power-info .connection.left.green > div, #power-info .connection.right.green > div {
+	background:url("/connection_horizontal_green.png");
+}
+#power-info .connection.down.green > div, #power-info .connection.up.green > div {
+	background:url("/connection_vertical_green.png");
+}
+#power-info .connection.left.red > div, #power-info .connection.right.red > div {
+	background:url("/connection_horizontal_red.png");
+}
+#power-info .connection.down.red > div, #power-info .connection.up.red > div {
+	background:url("/connection_vertical_red.png");
+}
+#power-info .connection.left.gray > div, #power-info .connection.right.gray > div {
+	background:url("/connection_horizontal_gray.png");
+}
+#power-info .connection.down.gray > div, #power-info .connection.up.gray > div {
+	background:url("/connection_vertical_gray.png");
+}
+#power-info .connection.left:not(.gray) > div {
+	animation-name:connection-left;
+}
+@keyframes connection-left {
+	from {
+		transform:translateX(0);
+	}
+	to {
+		transform:translateX(-48%);
+	}
+}
+#power-info .connection.right:not(.gray) > div {
+	animation-name:connection-right;
+}
+@keyframes connection-right {
+	from {
+		transform:translateX(-48%);
+	}
+	to {
+		transform:translateX(0);
+	}
+}
+#power-info .connection.down:not(.gray) > div {
+	animation-name:connection-down;
+}
+@keyframes connection-down {
+	from {
+		transform:translateY(-48%);
+	}
+	to {
+		transform:translateY(0);
+	}
+}
+#power-info .connection.up:not(.gray) > div {
+	animation-name:connection-up;
+}
+@keyframes connection-up {
+	from {
+		transform:translateY(0);
+	}
+	to {
+		transform:translateY(-48%);
+	}
+}

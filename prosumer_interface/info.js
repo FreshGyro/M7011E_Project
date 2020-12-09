@@ -1,6 +1,6 @@
 
 (function() {
-	const info = document.getElementById("info");
+	const info = document.getElementById("power-info");
 	const consumptionInfo = info.getElementsByTagName("p")[0];
 	const batteryInfo = info.getElementsByTagName("p")[1];
 	const productionInfo = info.getElementsByTagName("p")[2];
