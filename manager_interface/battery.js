@@ -10,24 +10,44 @@
 			labels:labels,
 			datasets:[{
 				label:"Battery charge",
-				backgroundColor:"Green",
-				borderColor:"Green",
+				backgroundColor:"#57ce25",
+				borderColor:"#4aaf1f",
 				fill:false,
 				data:batteryData
 			},{
 				label:"Max battery",
-				backgroundColor:"Purple",
-				borderColor:"Purple",
+				backgroundColor:"#9a22d6",
+				borderColor:"#8a11c6",
 				fill:false,
 				data:maxData
 			}]
 	  },
 		options:{
 			responsive:true,
+			legend:{
+				labels:{
+					fontColor:"#fff"
+				}
+			},
 			scales:{
-				yAxes:[{
+				xAxes:[{
+					gridLines:{
+						color:"rgba(255,255,255,0.1)",
+						zeroLineColor:"#fff"
+					},
 					ticks:{
-						beginAtZero:true
+						beginAtZero:true,
+						fontColor:"#fff"
+					}
+				}],
+				yAxes:[{
+					gridLines:{
+						color:"rgba(255,255,255,0.1)",
+						zeroLineColor:"#fff"
+					},
+					ticks:{
+						beginAtZero:true,
+						fontColor:"#fff"
 					}
 				}]
 			}

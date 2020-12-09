@@ -10,24 +10,44 @@
 			labels:labels,
 			datasets:[{
 				label:"Market production",
-				backgroundColor:"Red",
-				borderColor:"Red",
+				backgroundColor:"#d31f55",
+				borderColor:"#b51b49",
 				fill:false,
 				data:productionData
 			},{
 				label:"Market demand",
-				backgroundColor:"Blue",
-				borderColor:"Blue",
+				backgroundColor:"#1fd3ac",
+				borderColor:"#19aa8b",
 				fill:false,
 				data:demandData
 			}]
 	  },
 		options:{
 			responsive:true,
+			legend:{
+				labels:{
+					fontColor:"#fff"
+				}
+			},
 			scales:{
-				yAxes:[{
+				xAxes:[{
+					gridLines:{
+						color:"rgba(255,255,255,0.1)",
+						zeroLineColor:"#fff"
+					},
 					ticks:{
-						beginAtZero:true
+						beginAtZero:true,
+						fontColor:"#fff"
+					}
+				}],
+				yAxes:[{
+					gridLines:{
+						color:"rgba(255,255,255,0.1)",
+						zeroLineColor:"#fff"
+					},
+					ticks:{
+						beginAtZero:true,
+						fontColor:"#fff"
 					}
 				}]
 			}
