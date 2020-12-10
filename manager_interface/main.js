@@ -67,6 +67,7 @@
 					} else {
 						isPowerPlantEnabled = false;
 					}
+					refreshPowerPlantButtonLabel();
 				}
 			}
 		};
