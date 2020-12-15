@@ -117,16 +117,33 @@ app.post("/uploadimage", multer.single("photo"), (request, response) => {
 });
 
 app.get("/getprosumerlist", (request, response) => {
-	const json = [];
+	const userData = [];
+	const idList = [];
 	users.forEach((user) => {
-		json.push({
+		userData.push({
 			id:user.id,
 			username:user.username,
 			isActive:activity.isUserActive(user.id)
 		});
+		idList.push(user.id);
 	});
-
-	response.json(json);
+	simulator.getProsumersData(idList).then((prosumerData) => {
+		const json = [];
+		for(let i = 0; i < idList.length; i++) {
+			json.push({
+				"id":userData[i].id,
+				"username":userData[i].username,
+				"isActive":userData[i].isActive,
+				"wind":prosumerData[i]["wind"],
+				"production":prosumerData[i]["production"],
+				"consumption":prosumerData[i]["consumption"],
+				"battery":prosumerData[i]["battery"],
+				"max_battery":prosumerData[i]["max_battery"],
+				"market_ratio":prosumerData[i]["market_ration"]
+			});
+		}
+		response.json(json);
+	});
 });
 
 app.listen(81);

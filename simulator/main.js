@@ -63,6 +63,21 @@ app.get("/getprosumerdata", (request, response) => {
 	}
 });
 
+app.get("/getprosumersdata", (request, response) => {
+	const prosumers = consumption.getProsumersByList(JSON.parse(request.query.idList));
+	const prosumersData = [];
+	prosumers.forEach(prosumer => prosumersData.push({
+		"wind":prosumer.getWindSpeed(consumption.getCurrentTime()),
+		"production":prosumer.getProduction(consumption.getCurrentTime()),
+		"consumption":prosumer.getConsumption(),
+		"battery":prosumer.getBatteryLevel(),
+		"max_battery":prosumer.getMaxBatteryLevel(),
+		"market_ratio":prosumer.getMarketRatio()
+		})
+	);
+	response.json(prosumersData);
+});
+
 app.get("/setmarketratio", (request, response) => {
 	const id = parseInt(request.query.id, 10);
 	const ratio = parseFloat(request.query.ratio);

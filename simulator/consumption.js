@@ -19,6 +19,13 @@ function getProsumerById(id) {
 }
 module.exports.getProsumerById = getProsumerById;
 
+function getProsumersByList(list) {
+ 	const prosumerList = [];
+	list.forEach(id => prosumerList.push(prosumerMap.get(id)));
+	return prosumerList;
+}
+module.exports.getProsumersByList = getProsumersByList;
+
 const powerPlant = new PowerPlant();
 addProsumer(powerPlant);
 
