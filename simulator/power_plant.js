@@ -6,7 +6,7 @@ class PowerPlant extends Prosumer {
 		this._consumption = 1000;
 		this._marketRatio = 1;
 		this._isOn = false;
-		this._timestamp = 0;
+		this._timestamp = -Infinity;
 	}
 
 	getMaxBatteryLevel() {
