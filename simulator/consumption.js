@@ -9,7 +9,6 @@ function addProsumer(prosumer) {
 	const id = nextProsumerID++;
 	prosumers.push(prosumer);
 	prosumerMap.set(id, prosumer);
-	prosumers.push(prosumer);
 	return id;
 }
 module.exports.addProsumer = addProsumer;
