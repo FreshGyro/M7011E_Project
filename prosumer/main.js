@@ -146,5 +146,51 @@ app.get("/getprosumerlist", (request, response) => {
 	});
 });
 
+//Manager actions
+//TODO manager verification
+
+app.post("/changeusername", (request, response) => {
+	const id = parseInt(request.body.id, 10);
+	const newUsername = request.body.newUsername;
+
+	const user = users.get(id);
+	if(user != null) {
+		if(login.usernameToID(newUsername) != null) {
+			//Username is already taken
+			response.json({
+				success:false
+			});
+		} else {
+			user.username = newUsername;
+			login.changeUsername(id, newUsername);
+			response.json({
+				success:true
+			});
+		}
+	} else {
+		response.json({
+			success:false
+		});
+	}
+});
+
+app.post("/changepassword", (request, response) => {
+	const id = parseInt(request.body.id, 10);
+	const newPassword = request.body.newPassword;
+
+	const user = users.get(id);
+	if(user != null) {
+		login.changePassword(id, newPassword).then(() => {
+			response.json({
+				success:true
+			});
+		});
+	} else {
+		response.json({
+			success:false
+		});
+	}
+});
+
 app.listen(81);
 console.log("Server is running!");
