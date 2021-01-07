@@ -16,7 +16,7 @@
 			if(this.readyState == 4 && this.status == 200) {
 				const json = JSON.parse(request.responseText);
 
-				table.innerHTML = "<tr><th>Username</th><th>ID</th><th>Status</th><th>Battery</th><th>Max battery</th><th>Consumption</th><th>Production</th><th>Wind</th><th>Edit Username</th><th>Edit Password</th></tr>";
+				table.innerHTML = "<tr><th>Username</th><th>ID</th><th>Status</th><th>Battery</th><th>Max battery</th><th>Consumption</th><th>Production</th><th>Wind</th><th>Edit Username</th><th>Edit Password</th><th>Delete User</th></tr>";
 				for(let i = 0; i < json.length; ++i) {
 					const user = json[i];
 
@@ -89,13 +89,30 @@
 						if(newPassword != null) {
 							sha512(newPassword).then((newPasswordHash) => {
 								const request = new XMLHttpRequest();
-								request.open("POST", "http://127.0.0.1:81/changepassword", true);
+								request.open("POST", "http://127.0.0.1:81/deleteuser", true);
 								request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 								request.send("id=" + userID + "&newPassword=" + newPasswordHash);
 							});
 						}
 					});
 					td.appendChild(changePassword);
+					tr.appendChild(td);
+
+					td = document.createElement("td");
+					const deleteUser = document.createElement("button");
+					deleteUser.className = "button";
+					deleteUser.textContent = "Delete";
+					deleteUser.addEventListener("click", () => {
+						const userID = user["id"];
+						const username = user["username"];
+						if(confirm("Are you sure you want to delete the user \"" + username + "\"?")) {
+							const request = new XMLHttpRequest();
+							request.open("POST", "http://127.0.0.1:81/deleteuser", true);
+							request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+							request.send("id=" + userID);
+						}
+					});
+					td.appendChild(deleteUser);
 					tr.appendChild(td);
 
 					table.appendChild(tr);

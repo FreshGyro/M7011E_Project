@@ -193,5 +193,24 @@ app.post("/changepassword", (request, response) => {
 	}
 });
 
+
+app.post("/deleteuser", (request, response) => {
+	const id = parseInt(request.body.id, 10);
+
+	if(users.has(id)) {
+		users.delete(id);
+		login.removeUser(id);
+		simulator.deleteProsumer(id).then(() => {
+			response.json({
+				success:true
+			});
+		});
+	} else {
+		response.json({
+			success:false
+		});
+	}
+});
+
 app.listen(81);
 console.log("Server is running!");

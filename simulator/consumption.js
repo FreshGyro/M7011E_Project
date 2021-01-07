@@ -13,6 +13,29 @@ function addProsumer(prosumer) {
 }
 module.exports.addProsumer = addProsumer;
 
+function deleteProsumer(prosumer) {
+	for(let i = 0; i < prosumers.length; ++i) {
+		if(prosumers[i] == prosumer) {
+			prosumers.splice(i, 1);
+			break;
+		}
+	}
+
+	let prosumerID = null;
+	prosumerMap.forEach((p, id) => {
+		if(p == prosumer) {
+			prosumerID = id;
+		}
+	});
+
+	if(prosumerID == null) {
+		throw "Can't remove unknown prosumer";
+	} else {
+		prosumerMap.delete(prosumerID);
+	}
+}
+module.exports.deleteProsumer = deleteProsumer;
+
 function getProsumerById(id) {
 	return prosumerMap.get(id);
 }

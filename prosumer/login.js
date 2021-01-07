@@ -47,6 +47,19 @@ function loginUser(username, password) {
 }
 exports.loginUser = loginUser;
 
+function removeUser(id) {
+	let username = null;
+	userIDs.forEach((userID, name) => {
+		if(userID == id) {
+			username = name;
+		}
+	});
+
+	userIDs.delete(username);
+	users.delete(username);
+}
+exports.removeUser = removeUser;
+
 function changeUsername(id, newUsername) {
 	let oldUsername = null;
 	userIDs.forEach((userID, username) => {

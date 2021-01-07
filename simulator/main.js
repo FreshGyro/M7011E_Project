@@ -43,6 +43,21 @@ app.get("/createprosumer", (request, response) => {
 	});
 });
 
+app.get("/deleteprosumer", (request, response) => {
+	const id = parseInt(request.query.id, 10);
+	const prosumer = consumption.getProsumerById(id);
+	if(prosumer == null) {
+		response.json({
+			error:"Unknown prosumer"
+		});
+	} else {
+		consumption.deleteProsumer(prosumer);
+		response.json({
+			success:true
+		});
+	}
+});
+
 app.get("/getprosumerdata", (request, response) => {
 	const id = parseInt(request.query.id, 10);
 	const prosumer = consumption.getProsumerById(id);

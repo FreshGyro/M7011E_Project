@@ -22,6 +22,28 @@ function createProsumer() {
 }
 module.exports.createProsumer = createProsumer;
 
+
+function deleteProsumer(userID) {
+	return new Promise((resolve, reject) => {
+		const request = new XMLHttpRequest();
+		request.onreadystatechange = function() {
+			if(this.readyState == 4 && this.status == 200) {
+				const json = JSON.parse(request.responseText);
+				if(json.hasOwnProperty("error")) {
+					reject(json["error"]);
+				} else {
+					resolve();
+				}
+			} else {
+				//TODO error
+			}
+		};
+		request.open("GET", "http://127.0.0.1/deleteprosumer?id=" + userID, true);
+		request.send();
+	});
+}
+module.exports.deleteProsumer = deleteProsumer;
+
 function getProsumerData(id) {
 	return new Promise((resolve, reject) => {
 		const request = new XMLHttpRequest();
