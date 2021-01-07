@@ -139,7 +139,8 @@ app.get("/getprosumerlist", (request, response) => {
 				"consumption":prosumerData[i]["consumption"],
 				"battery":prosumerData[i]["battery"],
 				"max_battery":prosumerData[i]["max_battery"],
-				"market_ratio":prosumerData[i]["market_ration"]
+				"market_ratio":prosumerData[i]["market_ration"],
+				"blackout":prosumerData[i]["blackout"]
 			});
 		}
 		response.json(json);

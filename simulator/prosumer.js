@@ -8,6 +8,14 @@ class Prosumer {
 		this._consumption = gaussian.gaussianDistribution(800);
 		this._batteryLevel = 0;
 		this._marketRatio = 0.3;
+		this._blackout = false;
+	}
+
+	setBlackout(b) {
+		this._blackout = b;
+	}
+	getBlackout() {
+		return this._blackout;
 	}
 
 	setMarketRatio(ratio) {

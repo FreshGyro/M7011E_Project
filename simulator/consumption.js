@@ -88,12 +88,18 @@ function update() {
 				if(marketAmount > demand) {
 					//Used electricity from market
 					marketAmount -= demand;
+					p.setBlackout(false);
 				} else {
 					//Blackout
+					p.setBlackout(true);
 				}
+			} else {
+				p.setBlackout(false);
 			}
 
 			marketDemand += demand;
+		} else {
+			p.setBlackout(false);
 		}
 	}
 

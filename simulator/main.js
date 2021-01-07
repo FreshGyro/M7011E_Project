@@ -58,7 +58,8 @@ app.get("/getprosumerdata", (request, response) => {
 			"battery":prosumer.getBatteryLevel(),
 			"max_battery":prosumer.getMaxBatteryLevel(),
 			"market_ratio":prosumer.getMarketRatio(),
-			"market_price":consumption.getMarketPrice()
+			"market_price":consumption.getMarketPrice(),
+			"blackout":prosumer.getBlackout()
 		});
 	}
 });
@@ -72,7 +73,8 @@ app.get("/getprosumersdata", (request, response) => {
 		"consumption":prosumer.getConsumption(),
 		"battery":prosumer.getBatteryLevel(),
 		"max_battery":prosumer.getMaxBatteryLevel(),
-		"market_ratio":prosumer.getMarketRatio()
+		"market_ratio":prosumer.getMarketRatio(),
+		"blackout":prosumer.getBlackout()
 		})
 	);
 	response.json(prosumersData);

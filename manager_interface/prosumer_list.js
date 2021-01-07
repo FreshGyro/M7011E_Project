@@ -47,7 +47,11 @@
 					tr.appendChild(td);
 
 					td = document.createElement("td");
-					td.textContent = Math.floor(user["consumption"]) + " W";
+					if(user["blackout"]) {
+						td.textContent = Math.floor(user["consumption"]) + " W (BLACKOUT)";
+					} else {
+						td.textContent = Math.floor(user["consumption"]) + " W";
+					}
 					tr.appendChild(td);
 
 					td = document.createElement("td");
