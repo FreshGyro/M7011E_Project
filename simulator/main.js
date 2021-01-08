@@ -19,15 +19,8 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-//Random prosumers
-for(let i = 0; i < 12345; ++i) {
-	const x = Math.random() * 100000;
-	const y = Math.random() * 100000;
-	simulation.addProsumer(new Prosumer(x, y));
-}
-
 //Random consumers
-for(let i = 0; i < 420; ++i) {
+for(let i = 0; i < 10; ++i) {
 	const x = Math.random() * 100000;
 	const y = Math.random() * 100000;
 	simulation.addProsumer(new Consumer(x, y));

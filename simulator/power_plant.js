@@ -10,13 +10,13 @@ class PowerPlant extends Prosumer {
 	}
 
 	getMaxBatteryLevel() {
-		return 30000;
+		return 300000;
 	}
 	getProduction(time) {
 		if(this.isOn() && (time - this._timestamp) >= 3) {
-			return 300000;
+			return 30000;
 		} else if(!this.isOn() && (time - this._timestamp) < 3) {
-			return 300000;
+			return 30000;
 		} else {
 			return 0;
 		}
