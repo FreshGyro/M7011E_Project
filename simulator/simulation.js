@@ -67,13 +67,15 @@ function update() {
 	let marketProduction = 0;
 	for(let i = 0; i < prosumers.length; ++i) {
 		const p = prosumers[i];
+
 		const production = p.getProduction(currentTime);
 		const consumption = p.getConsumption();
+		
+		p.blockTimerTick();
+
 		if(production == consumption) {
 			//Evens out
 		} else if(production > consumption) {
-			p.blockTimerTick();
-
 			//Charge battery
 			let marketRatio;
 			if(p.isBlocked()) {
