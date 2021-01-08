@@ -7,7 +7,7 @@ const Consumer = require("./consumer.js");
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
-const consumption = require("./consumption.js");
+const simulation = require("./simulation.js");
 const weather = require("./weather.js");
 
 const app = express();
@@ -23,20 +23,20 @@ app.use(bodyParser.urlencoded({extended:true}));
 for(let i = 0; i < 12345; ++i) {
 	const x = Math.random() * 100000;
 	const y = Math.random() * 100000;
-	consumption.addProsumer(new Prosumer(x, y));
+	simulation.addProsumer(new Prosumer(x, y));
 }
 
 //Random consumers
 for(let i = 0; i < 420; ++i) {
 	const x = Math.random() * 100000;
 	const y = Math.random() * 100000;
-	consumption.addProsumer(new Consumer(x, y));
+	simulation.addProsumer(new Consumer(x, y));
 }
 
 app.get("/createprosumer", (request, response) => {
 	const x = Math.random() * 100000;
 	const y = Math.random() * 100000;
-	const id = consumption.addProsumer(new Prosumer(x, y));
+	const id = simulation.addProsumer(new Prosumer(x, y));
 
 	response.json({
 		id:id
@@ -45,13 +45,13 @@ app.get("/createprosumer", (request, response) => {
 
 app.get("/deleteprosumer", (request, response) => {
 	const id = parseInt(request.query.id, 10);
-	const prosumer = consumption.getProsumerById(id);
+	const prosumer = simulation.getProsumerById(id);
 	if(prosumer == null) {
 		response.json({
 			error:"Unknown prosumer"
 		});
 	} else {
-		consumption.deleteProsumer(prosumer);
+		simulation.deleteProsumer(prosumer);
 		response.json({
 			success:true
 		});
@@ -62,7 +62,7 @@ app.get("/blockuser", (request, response) => {
 	const id = parseInt(request.query.id, 10);
 	const seconds = parseInt(request.query.seconds, 10);
 
-	const prosumer = consumption.getProsumerById(id);
+	const prosumer = simulation.getProsumerById(id);
 	if(prosumer == null) {
 		response.json({
 			error:"Unknown prosumer"
@@ -77,20 +77,20 @@ app.get("/blockuser", (request, response) => {
 
 app.get("/getprosumerdata", (request, response) => {
 	const id = parseInt(request.query.id, 10);
-	const prosumer = consumption.getProsumerById(id);
+	const prosumer = simulation.getProsumerById(id);
 	if(prosumer == null) {
 		response.json({
 			error:"Unknown prosumer"
 		});
 	} else {
 		response.json({
-			"wind":prosumer.getWindSpeed(consumption.getCurrentTime()),
-			"production":prosumer.getProduction(consumption.getCurrentTime()),
+			"wind":prosumer.getWindSpeed(simulation.getCurrentTime()),
+			"production":prosumer.getProduction(simulation.getCurrentTime()),
 			"consumption":prosumer.getConsumption(),
 			"battery":prosumer.getBatteryLevel(),
 			"max_battery":prosumer.getMaxBatteryLevel(),
 			"market_ratio":prosumer.getMarketRatio(),
-			"market_price":consumption.getMarketPrice(),
+			"market_price":simulation.getMarketPrice(),
 			"blackout":prosumer.getBlackout(),
 			"blocked":prosumer.isBlocked()
 		});
@@ -98,11 +98,11 @@ app.get("/getprosumerdata", (request, response) => {
 });
 
 app.get("/getprosumersdata", (request, response) => {
-	const prosumers = consumption.getProsumersByList(JSON.parse(request.query.idList));
+	const prosumers = simulation.getProsumersByList(JSON.parse(request.query.idList));
 	const prosumersData = [];
 	prosumers.forEach(prosumer => prosumersData.push({
-		"wind":prosumer.getWindSpeed(consumption.getCurrentTime()),
-		"production":prosumer.getProduction(consumption.getCurrentTime()),
+		"wind":prosumer.getWindSpeed(simulation.getCurrentTime()),
+		"production":prosumer.getProduction(simulation.getCurrentTime()),
 		"consumption":prosumer.getConsumption(),
 		"battery":prosumer.getBatteryLevel(),
 		"max_battery":prosumer.getMaxBatteryLevel(),
@@ -122,7 +122,7 @@ app.get("/setmarketratio", (request, response) => {
 			error:"Invalid ratio"
 		});
 	} else {
-		const prosumer = consumption.getProsumerById(id);
+		const prosumer = simulation.getProsumerById(id);
 		if(prosumer == null) {
 			response.json({
 				error:"Unknown prosumer"
@@ -139,7 +139,7 @@ app.get("/setmarketratio", (request, response) => {
 app.get("/setmarketprice", (request, response) => {
 	const price = parseInt(request.query.price, 10);
 	if(!isNaN(price)) {
-		consumption.setMarketPrice(price);
+		simulation.setMarketPrice(price);
 		response.json({
 			success:true
 		});
@@ -152,38 +152,38 @@ app.get("/setmarketprice", (request, response) => {
 
 app.get("/getmarketstats", (request, response) => {
 	response.json({
-		"time":consumption.getCurrentTime(),
-		"production":consumption.getMarketProduction(),
-		"demand":consumption.getMarketDemand()
+		"time":simulation.getCurrentTime(),
+		"production":simulation.getMarketProduction(),
+		"demand":simulation.getMarketDemand()
 	});
 });
 
 app.get("/getbatterystats", (request, response) => {
 	response.json({
-		"time":consumption.getCurrentTime(),
-		"battery":consumption.getTotalBattery(),
-		"max_battery":consumption.getTotalMaxBattery()
+		"time":simulation.getCurrentTime(),
+		"battery":simulation.getTotalBattery(),
+		"max_battery":simulation.getTotalMaxBattery()
 	});
 });
 
 app.get("/getpowerplantdata", (request, response) => {
-	const time = consumption.getCurrentTime();
-	const powerPlant = consumption.getPowerPlant();
+	const time = simulation.getCurrentTime();
+	const powerPlant = simulation.getPowerPlant();
 	response.json({
 		"status":powerPlant.getStatus(time),
 		"production":powerPlant.getProduction(time),
 		"consumption":powerPlant.getConsumption(),
 		"battery":powerPlant.getBatteryLevel(),
 		"max_battery":powerPlant.getMaxBatteryLevel(),
-		"suggested_price":consumption.getSuggestedMarketPrice(),
-		"market_price":consumption.getMarketPrice()
+		"suggested_price":simulation.getSuggestedMarketPrice(),
+		"market_price":simulation.getMarketPrice()
 	});
 });
 
 app.get("/setpowerplantenabled", (request, response) => {
 	const enabled = (request.query.enabled == "true");
-	const time = consumption.getCurrentTime();
-	const powerPlant = consumption.getPowerPlant();
+	const time = simulation.getCurrentTime();
+	const powerPlant = simulation.getPowerPlant();
 	if(enabled) {
 		powerPlant.turnOn(time);
 	} else {
@@ -203,12 +203,12 @@ app.listen(80);
 console.log("Server is running!");
 
 function update() {
-	consumption.update();
-	console.log("Market production: " + consumption.getMarketProduction());
-	console.log("Market demand: " + consumption.getMarketDemand());
-	console.log("Delta: " + (consumption.getMarketProduction() - consumption.getMarketDemand()));
-	console.log("Suggested price: " + consumption.getSuggestedMarketPrice());
-	console.log("Current price: " + consumption.getMarketPrice());
+	simulation.update();
+	console.log("Market production: " + simulation.getMarketProduction());
+	console.log("Market demand: " + simulation.getMarketDemand());
+	console.log("Delta: " + (simulation.getMarketProduction() - simulation.getMarketDemand()));
+	console.log("Suggested price: " + simulation.getSuggestedMarketPrice());
+	console.log("Current price: " + simulation.getMarketPrice());
 }
 
 setInterval(() => {
