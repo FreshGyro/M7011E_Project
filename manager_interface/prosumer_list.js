@@ -48,6 +48,7 @@
 
 					td = document.createElement("td");
 					if(user["blackout"]) {
+						td.className = "red";
 						td.textContent = Math.floor(user["consumption"]) + " W (BLACKOUT)";
 					} else {
 						td.textContent = Math.floor(user["consumption"]) + " W";
