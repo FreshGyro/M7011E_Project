@@ -72,18 +72,29 @@ function update() {
 		if(production == consumption) {
 			//Evens out
 		} else if(production > consumption) {
+			p.blockTimerTick();
+
 			//Charge battery
-			const marketRatio = p.getMarketRatio();
+			let marketRatio;
+			if(p.isBlocked()) {
+				marketRatio = 0;
+			} else {
+				marketRatio = p.getMarketRatio();
+			}
 
 			const spaceInBattery = p.getMaxBatteryLevel() - p.getBatteryLevel();
 			if(spaceInBattery >= (1 - marketRatio) * (production - consumption)) {
 				//There is room in the battery for all the charge
 				p.chargeBattery((1 - marketRatio) * (production - consumption));
-				marketProduction += marketRatio * (production - consumption);
+				if(!p.isBlocked()) {
+					marketProduction += marketRatio * (production - consumption);
+				}
 			} else {
 				//There is not enough room in the battery, sell excess electricity
 				p.chargeBattery(spaceInBattery);
-				marketProduction += production - consumption - spaceInBattery;
+				if(!p.isBlocked()) {
+					marketProduction += production - consumption - spaceInBattery;
+				}
 			}
 		}
 	}

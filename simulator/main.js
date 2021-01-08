@@ -58,6 +58,23 @@ app.get("/deleteprosumer", (request, response) => {
 	}
 });
 
+app.get("/blockuser", (request, response) => {
+	const id = parseInt(request.query.id, 10);
+	const seconds = parseInt(request.query.seconds, 10);
+
+	const prosumer = consumption.getProsumerById(id);
+	if(prosumer == null) {
+		response.json({
+			error:"Unknown prosumer"
+		});
+	} else {
+		prosumer.block(seconds);
+		response.json({
+			success:true
+		});
+	}
+});
+
 app.get("/getprosumerdata", (request, response) => {
 	const id = parseInt(request.query.id, 10);
 	const prosumer = consumption.getProsumerById(id);
@@ -74,7 +91,8 @@ app.get("/getprosumerdata", (request, response) => {
 			"max_battery":prosumer.getMaxBatteryLevel(),
 			"market_ratio":prosumer.getMarketRatio(),
 			"market_price":consumption.getMarketPrice(),
-			"blackout":prosumer.getBlackout()
+			"blackout":prosumer.getBlackout(),
+			"blocked":prosumer.isBlocked()
 		});
 	}
 });
@@ -89,7 +107,8 @@ app.get("/getprosumersdata", (request, response) => {
 		"battery":prosumer.getBatteryLevel(),
 		"max_battery":prosumer.getMaxBatteryLevel(),
 		"market_ratio":prosumer.getMarketRatio(),
-		"blackout":prosumer.getBlackout()
+		"blackout":prosumer.getBlackout(),
+		"blocked":prosumer.isBlocked()
 		})
 	);
 	response.json(prosumersData);

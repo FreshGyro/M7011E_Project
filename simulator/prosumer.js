@@ -9,6 +9,7 @@ class Prosumer {
 		this._batteryLevel = 0;
 		this._marketRatio = 0.3;
 		this._blackout = false;
+		this._blockTimer = -Infinity;
 	}
 
 	setBlackout(b) {
@@ -16,6 +17,16 @@ class Prosumer {
 	}
 	getBlackout() {
 		return this._blackout;
+	}
+
+	block(seconds) {
+		this._blockTimer = seconds;
+	}
+	blockTimerTick() {
+		--this._blockTimer;
+	}
+	isBlocked() {
+		return (this._blockTimer > 0);
 	}
 
 	setMarketRatio(ratio) {

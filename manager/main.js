@@ -49,6 +49,16 @@ app.get("/setmarketprice", (request, response) => {
 	});
 });
 
+app.get("/blockuser", (request, response) => {
+	simulator.blockUser(request.query.id, request.query.seconds).then((data) => {
+		response.json(data);
+	}).catch((error) => {
+		response.json({
+			error:error
+		});
+	});
+});
+
 app.post("/uploadimage", multer.single("photo"), (request, response) => {
 	fs.rename(request.file.path, "./uploads/manager.jpg", (error) => {
 		if(error) {

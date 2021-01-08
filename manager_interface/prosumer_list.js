@@ -16,7 +16,7 @@
 			if(this.readyState == 4 && this.status == 200) {
 				const json = JSON.parse(request.responseText);
 
-				table.innerHTML = "<tr><th>Username</th><th>ID</th><th>Status</th><th>Battery</th><th>Max battery</th><th>Consumption</th><th>Production</th><th>Wind</th><th>Edit Username</th><th>Edit Password</th><th>Delete User</th></tr>";
+				table.innerHTML = "<tr><th>Username</th><th>ID</th><th>Status</th><th>Battery</th><th>Max battery</th><th>Consumption</th><th>Production</th><th>Wind</th><th>Edit Username</th><th>Edit Password</th><th>Delete User</th><th>Block User</th></tr>";
 				for(let i = 0; i < json.length; ++i) {
 					const user = json[i];
 
@@ -56,7 +56,12 @@
 					tr.appendChild(td);
 
 					td = document.createElement("td");
-					td.textContent = Math.floor(user["production"]) + " W";
+					if(user["blocked"]) {
+						td.className = "red";
+						td.textContent = Math.floor(user["production"]) + " W (BLOCKED)";
+					} else {
+						td.textContent = Math.floor(user["production"]) + " W";
+					}
 					tr.appendChild(td);
 
 					td = document.createElement("td");
@@ -114,6 +119,26 @@
 						}
 					});
 					td.appendChild(deleteUser);
+					tr.appendChild(td);
+
+					td = document.createElement("td");
+					const blockUser = document.createElement("button");
+					blockUser.className = "button";
+					blockUser.textContent = "Block";
+					blockUser.addEventListener("click", () => {
+						const userID = user["id"];
+						const secondsInput = prompt("Enter number of seconds to block user");
+						if(secondsInput != null) {
+							const seconds = parseInt(secondsInput, 10);
+							if(!isNaN(seconds)) {
+								const request = new XMLHttpRequest();
+								request.open("GET", "http://127.0.0.1:82/blockuser?id=" + userID + "&seconds=" + seconds, true);
+								request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+								request.send();
+							}
+						}
+					});
+					td.appendChild(blockUser);
 					tr.appendChild(td);
 
 					table.appendChild(tr);
