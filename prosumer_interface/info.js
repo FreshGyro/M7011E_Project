@@ -50,7 +50,7 @@
 				}
 			}
 		};
-		request.open("POST", "http://127.0.0.1:81/getprosumerdata", true);
+		request.open("POST", "http://" + prosumerServerAddress + ":" + prosumerServerPort + "/getprosumerdata", true);
 		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		request.send("username=" + account.getUsername() + "&password=" + account.getPasswordHash());
 	}

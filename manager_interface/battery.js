@@ -77,7 +77,7 @@
 				}
 			}
 		};
-		request.open("GET", "http://127.0.0.1/getbatterystats", true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/getbatterystats", true);
 		request.send();
 	}, 500);
 })();

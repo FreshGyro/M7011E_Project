@@ -71,7 +71,7 @@
 				}
 			}
 		};
-		request.open("GET", "http://127.0.0.1:82/getpowerplantdata", true);
+		request.open("GET", "http://" + managerServerAddress + ":" + managerServerPort + "/getpowerplantdata", true);
 		request.send();
 	}
 	updateInfo();
@@ -96,7 +96,7 @@
 				}
 			}
 		};
-		request.open("GET", "http://127.0.0.1:82/setpowerplantenabled?enabled=" + enabled, true);
+		request.open("GET", "http://" + managerServerAddress + ":" + managerServerPort + "/setpowerplantenabled?enabled=" + enabled, true);
 		request.send();
 	}
 	togglePowerPlantButton.addEventListener("click", () => {

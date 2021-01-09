@@ -6,6 +6,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer")({dest:"./uploads"});
 const fs = require("fs");
+const vm = require("vm");
+
+vm.runInThisContext(fs.readFileSync(__dirname + "/../config.js"));
 
 const activity = require("./activity.js");
 const login = require("./login.js");
@@ -15,7 +18,7 @@ const app = express();
 app.use("/uploads", express.static("./uploads"));
 
 app.use(cors({
-	origin:"http://127.0.0.1:3000",
+	origin:"http://" + webServerAddress + ":" + webServerPort,
 	optionsSuccessStatus:200
 }));
 app.use(bodyParser.json());
@@ -213,5 +216,5 @@ app.post("/deleteuser", (request, response) => {
 	}
 });
 
-app.listen(81);
+app.listen(prosumerServerPort);
 console.log("Server is running!");

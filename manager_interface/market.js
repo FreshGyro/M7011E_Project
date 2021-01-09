@@ -77,7 +77,7 @@
 				}
 			}
 		};
-		request.open("GET", "http://127.0.0.1/getmarketstats", true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/getmarketstats", true);
 		request.send();
 	}, 500);
 })();

@@ -26,7 +26,7 @@ const account = new function() {
 						}
 					}
 				};
-				request.open("POST", "http://127.0.0.1:81/login", true);
+				request.open("POST", "http://" + prosumerServerAddress + ":" + prosumerServerPort + "/login", true);
 				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				request.send("username=" + username + "&password=" + passwordHash);
 			});
@@ -55,7 +55,7 @@ const account = new function() {
 						}
 					}
 				};
-				request.open("POST", "http://127.0.0.1:81/register", true);
+				request.open("POST", "http://" + prosumerServerAddress + ":" + prosumerServerPort + "/register", true);
 				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				request.send("username=" + username + "&password=" + passwordHash);
 			});

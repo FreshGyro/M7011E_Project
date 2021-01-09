@@ -16,7 +16,7 @@ function createProsumer() {
 				//TODO error
 			}
 		};
-		request.open("GET", "http://127.0.0.1/createprosumer", true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/createprosumer", true);
 		request.send();
 	});
 }
@@ -38,7 +38,7 @@ function deleteProsumer(userID) {
 				//TODO error
 			}
 		};
-		request.open("GET", "http://127.0.0.1/deleteprosumer?id=" + userID, true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/deleteprosumer?id=" + userID, true);
 		request.send();
 	});
 }
@@ -59,7 +59,7 @@ function getProsumerData(id) {
 				//TODO error
 			}
 		};
-		request.open("GET", "http://127.0.0.1/getprosumerdata?id=" + id, true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/getprosumerdata?id=" + id, true);
 		request.send();
 	});
 }
@@ -80,7 +80,7 @@ function getProsumersData(idList) {
 				//TODO error
 			}
 		};
-		request.open("GET", "http://127.0.0.1/getprosumersdata?idList=" + encodeURIComponent(JSON.stringify(idList)), true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/getprosumersdata?idList=" + encodeURIComponent(JSON.stringify(idList)), true);
 		request.send();
 	});
 }
@@ -101,7 +101,7 @@ function setMarketRatio(id, ratio) {
 				//TODO error
 			}
 		};
-		request.open("GET", "http://127.0.0.1/setmarketratio?id=" + id + "&ratio=" + ratio, true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/setmarketratio?id=" + id + "&ratio=" + ratio, true);
 		request.send();
 	});
 }

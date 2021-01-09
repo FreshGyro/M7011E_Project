@@ -9,7 +9,7 @@ marketRatioSlider.onchange = function() {
 			//Success
 		}
 	};
-	request.open("POST", "http://127.0.0.1:81/setmarketratio", true);
+	request.open("POST", "http://" + prosumerServerAddress + ":" + prosumerServerPort + "/setmarketratio", true);
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	request.send("ratio=" + (parseFloat(this.value) / 100) + "&username=" + account.getUsername() + "&password=" + account.getPasswordHash());
 };

@@ -22,12 +22,12 @@
 		};
 		const formData = new FormData();
 		formData.append("photo", image);
-		request.open("POST", "http://127.0.0.1:82/uploadimage");
+		request.open("POST", "http://" + managerServerAddress + ":" + managerServerPort + "/uploadimage");
 		request.send(formData);
 	});
 
 	function refreshImage() {
-		image.src = "http://127.0.0.1:82/uploads/manager.jpg";
+		image.src = "http://" + managerServerAddress + ":" + managerServerPort + "/uploads/manager.jpg";
 	}
 	image.onerror = function() {
 		this.src = "/manager_interface/no_image.svg";

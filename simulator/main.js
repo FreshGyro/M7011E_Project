@@ -7,13 +7,18 @@ const Consumer = require("./consumer.js");
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
+const fs = require("fs");
+const vm = require("vm");
+
+vm.runInThisContext(fs.readFileSync(__dirname + "/../config.js"));
+
 const simulation = require("./simulation.js");
 const weather = require("./weather.js");
 
 const app = express();
 
 app.use(cors({
-	origin:"http://127.0.0.1:3000",
+	origin:"http://" + webServerAddress + ":" + webServerPort,
 	optionsSuccessStatus:200
 }));
 app.use(bodyParser.json());
@@ -192,7 +197,7 @@ app.get("/windspeed", (request, response) => {
 	response.json(weather.getWindSpeed(x, y, t));
 });
 
-app.listen(80);
+app.listen(simulatorServerPort);
 console.log("Server is running!");
 
 function update() {

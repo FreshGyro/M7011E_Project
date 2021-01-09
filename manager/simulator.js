@@ -16,7 +16,7 @@ function getPowerPlantData() {
 				//TODO error
 			}
 		};
-		request.open("GET", "http://127.0.0.1/getpowerplantdata", true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/getpowerplantdata", true);
 		request.send();
 	});
 }
@@ -37,7 +37,7 @@ function setPowerPlantEnabled(enabled) {
 				//TODO error
 			}
 		};
-		request.open("GET", "http://127.0.0.1/setpowerplantenabled?enabled=" + enabled, true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/setpowerplantenabled?enabled=" + enabled, true);
 		request.send();
 	});
 }
@@ -58,7 +58,7 @@ function setMarketPrice(price) {
 				//TODO error
 			}
 		};
-		request.open("GET", "http://127.0.0.1/setmarketprice?price=" + price, true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/setmarketprice?price=" + price, true);
 		request.send();
 	});
 }
@@ -79,7 +79,7 @@ function blockUser(id, seconds) {
 				//TODO error
 			}
 		};
-		request.open("GET", "http://127.0.0.1/blockuser?id=" + id + "&seconds=" + seconds, true);
+		request.open("GET", "http://" + simulatorServerAddress + ":" + simulatorServerPort + "/blockuser?id=" + id + "&seconds=" + seconds, true);
 		request.send();
 	});
 }

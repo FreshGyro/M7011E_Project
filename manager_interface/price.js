@@ -15,7 +15,7 @@ const price = new function() {
 				}
 			}
 		};
-		request.open("GET", "http://127.0.0.1:82/setmarketprice?price=" + price, true);
+		request.open("GET", "http://" + managerServerAddress + ":" + managerServerPort + "/setmarketprice?price=" + price, true);
 		request.send();
 	}
 

@@ -77,7 +77,7 @@
 						const newUsername = prompt("Enter new username");
 						if(newUsername != null) {
 							const request = new XMLHttpRequest();
-							request.open("POST", "http://127.0.0.1:81/changeusername", true);
+							request.open("POST", "http://" + prosumerServerAddress + ":" + prosumerServerPort + "/changeusername", true);
 							request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 							request.send("id=" + userID + "&newUsername=" + newUsername);
 						}
@@ -95,7 +95,7 @@
 						if(newPassword != null) {
 							sha512(newPassword).then((newPasswordHash) => {
 								const request = new XMLHttpRequest();
-								request.open("POST", "http://127.0.0.1:81/deleteuser", true);
+								request.open("POST", "http://" + prosumerServerAddress + ":" + prosumerServerPort + "/deleteuser", true);
 								request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 								request.send("id=" + userID + "&newPassword=" + newPasswordHash);
 							});
@@ -113,7 +113,7 @@
 						const username = user["username"];
 						if(confirm("Are you sure you want to delete the user \"" + username + "\"?")) {
 							const request = new XMLHttpRequest();
-							request.open("POST", "http://127.0.0.1:81/deleteuser", true);
+							request.open("POST", "http://" + prosumerServerAddress + ":" + prosumerServerPort + "/deleteuser", true);
 							request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 							request.send("id=" + userID);
 						}
@@ -132,7 +132,7 @@
 							const seconds = parseInt(secondsInput, 10);
 							if(!isNaN(seconds)) {
 								const request = new XMLHttpRequest();
-								request.open("GET", "http://127.0.0.1:82/blockuser?id=" + userID + "&seconds=" + seconds, true);
+								request.open("GET", "http://" + managerServerAddress + ":" + managerServerPort + "/blockuser?id=" + userID + "&seconds=" + seconds, true);
 								request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 								request.send();
 							}
@@ -145,7 +145,7 @@
 				}
 			}
 		};
-		request.open("GET", "http://127.0.0.1:81/getprosumerlist", true);
+		request.open("GET", "http://" + prosumerServerAddress + ":" + prosumerServerPort + "/getprosumerlist", true);
 		request.send();
 	}
 

@@ -6,6 +6,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer")({dest:"./uploads"});
 const fs = require("fs");
+const vm = require("vm");
+
+vm.runInThisContext(fs.readFileSync(__dirname + "/../config.js"));
 
 const simulator = require("./simulator.js");
 
@@ -13,7 +16,7 @@ const app = express();
 app.use("/uploads", express.static("./uploads"));
 
 app.use(cors({
-	origin:"http://127.0.0.1:3000",
+	origin:"http://" + webServerAddress + ":" + webServerPort,
 	optionsSuccessStatus:200
 }));
 app.use(bodyParser.json());
@@ -71,5 +74,5 @@ app.post("/uploadimage", multer.single("photo"), (request, response) => {
 	});
 });
 
-app.listen(82);
+app.listen(managerServerPort);
 console.log("Server is running!");
