@@ -1,11 +1,17 @@
 
 const account = new function() {
 	function sha512(string) {
-		return crypto.subtle.digest("SHA-512", new TextEncoder("utf-8").encode(string)).then(buffer => {
-			return Array.prototype.map.call(new Uint8Array(buffer), (char) => {
-				return ("00" + char.toString(16)).slice(-2);
-			}).join("");
-		});
+		if(window.crypto && window.crypto.subtle) {
+			return crypto.subtle.digest("SHA-512", new TextEncoder("utf-8").encode(string)).then(buffer => {
+				return Array.prototype.map.call(new Uint8Array(buffer), (char) => {
+					return ("00" + char.toString(16)).slice(-2);
+				}).join("");
+			});
+		} else {
+			return new Promise((resolve, reject) => {
+				resolve(SHA512(string));
+			});
+		}
 	}
 
 	this.login = function(username, password) {
