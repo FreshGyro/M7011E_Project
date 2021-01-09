@@ -17,8 +17,12 @@ const simulator = require("./simulator.js");
 const app = express();
 app.use("/uploads", express.static("./uploads"));
 
+let corsOrigin = "http://" + webServerAddress;
+if(webServerPort != 80) {
+	corsOrigin += ":" + webServerPort;
+}
 app.use(cors({
-	origin:"http://" + webServerAddress + ":" + webServerPort,
+	origin:corsOrigin,
 	optionsSuccessStatus:200
 }));
 app.use(bodyParser.json());

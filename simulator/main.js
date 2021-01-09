@@ -17,8 +17,12 @@ const weather = require("./weather.js");
 
 const app = express();
 
+let corsOrigin = "http://" + webServerAddress;
+if(webServerPort != 80) {
+	corsOrigin += ":" + webServerPort;
+}
 app.use(cors({
-	origin:"http://" + webServerAddress + ":" + webServerPort,
+	origin:corsOrigin,
 	optionsSuccessStatus:200
 }));
 app.use(bodyParser.json());
