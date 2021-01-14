@@ -1,0 +1,54 @@
+2020-11-05
+	12:00 Setup Github etc
+	13:00 Node.js base
+	14:00 Perlin noise
+
+2020-11-10
+	13:00 Basic prosumers
+	14:00 Basic market
+	16:00 Charts
+
+2020-11-13:
+	12:00 Prosumer system, prosumer basic interface
+	13:00 - CONTINUED -
+	14:00 Image upload
+	15:00 - CONTINUED -
+
+2020-11-18:
+	12:00 Prosumer login system
+	13:00 - CONTINUED -
+	14:00 - CONTINUED -
+	15:00 - CONTINUED -
+
+2020-11-20:
+	12:00 Power plant info
+	13:00 Enable/disable power plant
+
+2020-11-25:
+	12:00 User activity
+	13:00 Manager prosumer list
+	14:00 Fixed null prosumer market ratio, Better login system for prosumer
+
+2020-12-02:
+	12:00 Nicer image upload
+	13:00 - CONTINUED -, Placeholder prosumer image, logout button
+	14:00 Nicer login & register, Nicer main page
+	15:00 Prosumer nicer power layout with connections showing electricity moving in correct direction
+	16:00 Styled manager prosumer list, styled manager charts, styled manager image upload
+
+2020-12-09
+	14:00 Styled manager graphs
+	15:00 Styled manager market price, manager power interface
+	16:00 Manager power interface, Logout and exit buttons
+
+2021-01-07
+	12:00 Show prosumer data in manager table
+	13:00 Change username & password, show blackouts in list
+	14:00 Delete users
+
+2021-01-08
+	12:00 Block prosumers, Fixed blocking getting stuck, Simulator tests
+
+2021-01-09
+	12:00 Config file, setting up VPS
+	13:00 HTML charset, fixed cors errors, SHA-512 lib if not supported by browser
