@@ -1,0 +1,28 @@
+
+11/05 - Created a function that takes position data and gives a wind speed with a perlin noise generator
+
+11/10 - added gaussian distribution for consumption of electricity, 
+	added suggested price based on total production and consumption delta,
+
+11/13 - added power plant
+        added consumers
+	added manager interface and manager
+	added functionalit to allow manager to upload profile picture
+
+11/18
+	-added functionality so manager could control powerplant and see its status
+
+11/25	-added functionality so manager can see the simulated market price 
+	 added functionality so manager can see and set the current market price
+
+12/02	-started working on getting data from prosumers to manager
+
+12/09	-continued working on getting data from prosumers to manager
+
+12/15	-finished working getting data from prosumers to manager
+
+01/07 	-started working on report
+
+01/08   -continued working on report
+
+01/14	-finished working on report
