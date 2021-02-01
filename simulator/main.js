@@ -119,7 +119,7 @@ app.get("/getprosumersdata", (request, response) => {
 app.get("/setmarketratio", (request, response) => {
 	const id = parseInt(request.query.id, 10);
 	const ratio = parseFloat(request.query.ratio);
-	if(ratio < 0 && ratio > 1) {
+	if(ratio < 0 || ratio > 1) {
 		response.json({
 			error:"Invalid ratio"
 		});
