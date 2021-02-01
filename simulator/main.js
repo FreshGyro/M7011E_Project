@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 //Random consumers
-for(let i = 0; i < 10; ++i) {
+for(let i = 0; i < 34; ++i) {
 	const x = Math.random() * 100000;
 	const y = Math.random() * 100000;
 	simulation.addProsumer(new Consumer(x, y));
