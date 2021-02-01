@@ -14,6 +14,7 @@
 	const marketConnection = document.getElementById("market-connection");
 
 	let isPowerPlantEnabled = false;
+	let previousBatteryValue = null;
 
 	function updateInfo() {
 		const request = new XMLHttpRequest();
@@ -54,17 +55,17 @@
 							marketConnection.className = "connection up green";
 						}
 					} else if(json["consumption"] < json["production"]) {
-						if(json["battery"] < json["max_battery"] && marketRatio != 1) {
-							batteryConnection.className = "connection left red";
-						} else {
+						if(json["battery"] == json["max_battery"]) {
 							batteryConnection.className = "connection left gray";
+						} else {
+							if(previousBatteryValue == null || json["battery"] >= previousBatteryValue) {
+								batteryConnection.className = "connection left red";
+							} else {
+								batteryConnection.className = "connection right green";
+							}
 						}
 
-						if(marketRatio > 0 || json["battery"] >= json["max_battery"]) {
-							marketConnection.className = "connection down red";
-						} else {
-							marketConnection.className = "connection down gray";
-						}
+						marketConnection.className = "connection down red";
 					}
 
 					price.setPriceInfo(json["market_price"], json["suggested_price"]);
@@ -75,6 +76,8 @@
 						isPowerPlantEnabled = false;
 					}
 					refreshPowerPlantButtonLabel();
+
+					previousBatteryValue = json["battery"];
 				}
 			}
 		};
