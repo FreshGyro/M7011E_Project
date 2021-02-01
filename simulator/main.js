@@ -177,9 +177,25 @@ app.get("/getpowerplantdata", (request, response) => {
 		"consumption":powerPlant.getConsumption(),
 		"battery":powerPlant.getBatteryLevel(),
 		"max_battery":powerPlant.getMaxBatteryLevel(),
+		"market_ratio":powerPlant.getMarketRatio(),
 		"suggested_price":simulation.getSuggestedMarketPrice(),
 		"market_price":simulation.getMarketPrice()
 	});
+});
+
+app.get("/setpowerplantmarketratio", (request, response) => {
+	const ratio = parseFloat(request.query.ratio);
+	if(ratio < 0 || ratio > 1) {
+		response.json({
+			error:"Invalid ratio"
+		});
+	} else {
+		const powerPlant = simulation.getPowerPlant();
+		powerPlant.setMarketRatio(ratio);
+		response.json({
+			success:true
+		});
+	}
 });
 
 app.get("/setpowerplantenabled", (request, response) => {

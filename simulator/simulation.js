@@ -70,7 +70,7 @@ function update() {
 
 		const production = p.getProduction(currentTime);
 		const consumption = p.getConsumption();
-		
+
 		p.blockTimerTick();
 
 		if(production == consumption) {
@@ -78,7 +78,7 @@ function update() {
 		} else if(production > consumption) {
 			//Charge battery
 			let marketRatio;
-			if(p.isBlocked()) {
+			if(p.isBlocked() || p == powerPlant) {
 				marketRatio = 0;
 			} else {
 				marketRatio = p.getMarketRatio();
@@ -101,6 +101,10 @@ function update() {
 		}
 	}
 
+	//Add power plant battery power, will be refilled later
+	const powerPlantBatteryProduction = Math.min(powerPlant.getBatteryLevel(), powerPlant.getMaxBatteryLevel() * powerPlant.getMarketRatio());
+	marketProduction += powerPlantBatteryProduction;
+	powerPlant.useBattery(powerPlantBatteryProduction);
 
 	let marketDemand = 0;
 	let marketAmount = marketProduction;
@@ -122,12 +126,12 @@ function update() {
 			if(demand > 0) {
 				if(marketAmount > demand) {
 					//Used electricity from market
-					marketAmount -= demand;
 					p.setBlackout(false);
 				} else {
 					//Blackout
 					p.setBlackout(true);
 				}
+				marketAmount -= demand;
 			} else {
 				p.setBlackout(false);
 			}
@@ -136,6 +140,11 @@ function update() {
 		} else {
 			p.setBlackout(false);
 		}
+	}
+
+	if(marketAmount > 0) {
+		//Charge the power plant battery with remaining power
+		powerPlant.chargeBattery(marketAmount);
 	}
 
 	totalMarketProduction = marketProduction;

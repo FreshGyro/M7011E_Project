@@ -9,7 +9,7 @@
 		data:{
 			labels:labels,
 			datasets:[{
-				label:"Market production",
+				label:"Market supply",
 				backgroundColor:"#d31f55",
 				borderColor:"#b51b49",
 				fill:false,

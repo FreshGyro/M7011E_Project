@@ -36,6 +36,16 @@ app.get("/getpowerplantdata", (request, response) => {
 	});
 });
 
+app.get("/setpowerplantmarketratio", (request, response) => {
+	simulator.setPowerPlantMarketRatio(request.query.ratio).then((data) => {
+		response.json(data);
+	}).catch((error) => {
+		response.json({
+			error:error
+		});
+	});
+});
+
 app.get("/setpowerplantenabled", (request, response) => {
 	simulator.setPowerPlantEnabled(request.query.enabled).then((data) => {
 		response.json(data);

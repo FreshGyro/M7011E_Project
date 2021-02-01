@@ -12,6 +12,10 @@
 	height:320px;
 	vertical-align:middle;
 }
+#power-info > div > .window > p {
+	margin:4px;
+	padding:0;
+}
 #power-info > div > .window > img {
 	display:block;
 	margin:20px auto;
